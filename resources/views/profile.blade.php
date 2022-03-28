@@ -2,6 +2,7 @@
 
 @section('content')
     <div>
-        SIEMA
+        siema
     </div>
+
 @endsection
