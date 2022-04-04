@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,5 +19,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/profile', [ProfileController::class, 'index'] );
+Route::get('/profile', [ProfileController::class, 'get'] );
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
