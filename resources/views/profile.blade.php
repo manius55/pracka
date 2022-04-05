@@ -1,8 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <div>
-        siema
-    </div>
-
+    <profile-description :profile=" {{ $profile }}"></profile-description>
 @endsection

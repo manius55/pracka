@@ -1,14 +1,20 @@
 <template>
     <div>
-        asdasdasd
+        {{ profile.description }}
     </div>
 </template>
 
 <script>
 
+
 export default {
     name: "ProfileDescription",
-    props: ['profile'],
+    props: {
+        profile: Object
+    },
+    created() {
+
+    }
 }
 </script>
 
