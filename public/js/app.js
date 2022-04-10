@@ -5303,10 +5303,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ProfileDescription",
   props: {
-    profile: Object
+    profile: Object,
+    width: String
   },
   created: function created() {}
 });
@@ -34230,7 +34238,29 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    " + _vm._s(_vm.profile.description) + "\n")])
+  return _c("div", [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "text-center" }, [
+        _c("label", { attrs: { for: "description" } }, [_vm._v("Description")]),
+        _vm._v(" "),
+        _c("div", [
+          _c(
+            "textarea",
+            {
+              staticStyle: { resize: "none", width: "600px" },
+              attrs: {
+                id: "description",
+                rows: "4",
+                readonly: "",
+                draggable: "false",
+              },
+            },
+            [_vm._v(" " + _vm._s(_vm.profile.description) + " ")]
+          ),
+        ]),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
