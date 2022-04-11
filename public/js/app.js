@@ -5297,6 +5297,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5316,7 +5325,12 @@ __webpack_require__.r(__webpack_exports__);
     profile: Object,
     width: String
   },
-  created: function created() {}
+  created: function created() {
+    var date = this.profile.date_of_birth;
+    var newDate = new Date(date);
+    console.log(newDate.getMonth() + 1);
+    console.log(_typeof(newDate));
+  }
 });
 
 /***/ }),
@@ -34239,30 +34253,65 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "text-center" }, [
-        _c("label", { attrs: { for: "description" } }, [_vm._v("Description")]),
-        _vm._v(" "),
-        _c("div", [
+    _c("div", { staticClass: "container border" }, [
+      _c("div", { staticClass: "col-md gy-5" }, [
+        _c("div", { staticClass: "row justify-content-center py-4" }, [
+          _vm._m(0),
+          _vm._v(" "),
           _c(
-            "textarea",
+            "div",
             {
-              staticStyle: { resize: "none", width: "600px" },
-              attrs: {
-                id: "description",
-                rows: "4",
-                readonly: "",
-                draggable: "false",
-              },
+              staticClass: "border col-6 border border-dark rounded",
+              attrs: { id: "description" },
             },
-            [_vm._v(" " + _vm._s(_vm.profile.description) + " ")]
+            [_c("strong", [_vm._v(_vm._s(_vm.profile.description) + " ")])]
           ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-1" }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row justify-content-start" }, [
+          _c("div", { staticClass: "col-2" }),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "col-1 py-2 border text-center border-dark rounded",
+              attrs: { id: "date_of_birth" },
+            },
+            [_vm._v(_vm._s(_vm.profile.date_of_birth))]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-1" }),
         ]),
       ]),
     ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-1 py-5 px-0 h5", attrs: { for: "description" } },
+      [_c("strong", [_vm._v("Description:")])]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-1 py-2 px-0 h5", attrs: { for: "date_of_birth" } },
+      [_c("strong", [_vm._v("Date of birth:")])]
+    )
+  },
+]
 render._withStripped = true
 
 
