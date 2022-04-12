@@ -9,7 +9,7 @@ class ProfileController extends Controller
 {
     function get(int $id)
     {
-        $profile = DB::table('user_profiles')->find($id);
+        $profile = DB::table('user_profiles')->where('user_id', '=', $id)->first();
         dump($profile);
 //        $abc = (array) $profile;
 //        $abcDate = $abc['date_of_birth'];
