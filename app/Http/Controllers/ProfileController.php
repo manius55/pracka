@@ -11,13 +11,13 @@ class ProfileController extends Controller
     {
         $profile = DB::table('user_profiles')->where('user_id', '=', $id)->first();
 
-        return view('profile', [
+        return view('profile.profile', [
             'profile' => $profile
         ]);
     }
 
-    function update(array $data)
+    function editForm()
     {
-
+        return view('profile.editForm');
     }
 }

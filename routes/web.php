@@ -21,6 +21,8 @@ Auth::routes();
 
 Route::get('/profile/{id}', [ProfileController::class, 'get'] );
 
+Auth::routes();
+Route::get('/profile/{id}/edit/form', [ProfileController::class, 'editForm']);
 
 Auth::routes();
 
