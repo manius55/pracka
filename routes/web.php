@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/profile', [ProfileController::class, 'get'] );
+Route::get('/profile/{id}', [ProfileController::class, 'get'] );
 
 
 Auth::routes();

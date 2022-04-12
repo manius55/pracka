@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
-    function get()
+    function get(int $id)
     {
-        $profile = DB::table('user_profiles')->find(3);
+        $profile = DB::table('user_profiles')->find($id);
         dump($profile);
 //        $abc = (array) $profile;
 //        $abcDate = $abc['date_of_birth'];
