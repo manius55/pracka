@@ -5319,6 +5319,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ProfileDescription",
   props: {
@@ -34255,36 +34262,33 @@ var render = function () {
   return _c("div", [
     _c("div", { staticClass: "container border" }, [
       _c("div", { staticClass: "col-md gy-5" }, [
-        _c("div", { staticClass: "row justify-content-center py-4" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "border col-6 border border-dark rounded",
-              attrs: { id: "description" },
-            },
-            [_c("strong", [_vm._v(_vm._s(_vm.profile.description) + " ")])]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-1" }),
-        ]),
+        _vm._m(0),
         _vm._v(" "),
-        _c("div", { staticClass: "row justify-content-start" }, [
-          _c("div", { staticClass: "col-2" }),
-          _vm._v(" "),
+        _c("div", { staticClass: "row justify-content-center py-2" }, [
           _vm._m(1),
           _vm._v(" "),
           _c(
             "div",
             {
-              staticClass: "col-1 py-2 border text-center border-dark rounded",
+              staticClass: "border col-6 border border-dark rounded",
+              staticStyle: { height: "75px" },
+              attrs: { id: "description" },
+            },
+            [_c("strong", [_vm._v(_vm._s(_vm.profile.description) + " ")])]
+          ),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "col-2 py-2 border text-center border-dark rounded",
               attrs: { id: "date_of_birth" },
             },
             [_vm._v(_vm._s(_vm.profile.date_of_birth))]
           ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-1" }),
         ]),
       ]),
     ]),
@@ -34295,9 +34299,26 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-6" }, [
+        _c("img", {
+          staticClass: "rounded-circle mx-auto d-flex",
+          staticStyle: { width: "25%" },
+          attrs: {
+            src: "https://play-lh.googleusercontent.com/ByaDki7oQ9RZJV2XRVgRUCAHmM6aqApy4TLAiDx4MG2BVtr2ijknHf2taM76CjFBpdc",
+            alt: "naruto",
+          },
+        }),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
       "label",
-      { staticClass: "col-1 py-5 px-0 h5", attrs: { for: "description" } },
+      { staticClass: "text-center", attrs: { for: "description" } },
       [_c("strong", [_vm._v("Description:")])]
     )
   },
@@ -34307,8 +34328,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "label",
-      { staticClass: "col-1 py-2 px-0 h5", attrs: { for: "date_of_birth" } },
-      [_c("strong", [_vm._v("Date of birth:")])]
+      { staticClass: "text-center", attrs: { for: "date_of_birth" } },
+      [_c("strong", [_vm._v("Date of birth")])]
     )
   },
 ]
