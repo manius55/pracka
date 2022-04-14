@@ -25,5 +25,8 @@ Auth::routes();
 Route::get('/profile/{id}/edit/form', [ProfileController::class, 'editForm']);
 
 Auth::routes();
+Route::put('/profile/{id}/edit', [ProfileController::class, 'edit']);
+
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
