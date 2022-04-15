@@ -17,6 +17,9 @@ class CreateInvitationsTable extends Migration
             $table->integer('from_user')->unsigned();
             $table->integer('to_user')->unsigned();
             $table->boolean('accepted')->default(false);
+            $table->foreign('from_user')->references('id')->on('users');
+            $table->foreign('to_user')->references('id')->on('users');
+            $table->primary(['from_user', 'to_user']);
             $table->timestamps();
         });
     }
