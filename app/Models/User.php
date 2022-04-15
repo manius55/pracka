@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * @mixin Builder
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -45,5 +49,10 @@ class User extends Authenticatable
     public function UserProfile()
     {
         return $this->hasOne(UserProfile::class);
+    }
+
+    public function friends()
+    {
+        return $this->belongsToMany('User', 'friend_user', 'user_id', 'friend_id');
     }
 }
