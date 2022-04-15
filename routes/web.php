@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserFriendsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,13 +22,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/profile/{id}', [ProfileController::class, 'get'] );
-
-Auth::routes();
 Route::get('/profile/{id}/edit/form', [ProfileController::class, 'editForm']);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/friends/{id}', [UserFriendsController::class, 'get']);
 
-Auth::routes();
 Route::put('/profile/{id}/edit', [ProfileController::class, 'edit']);
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
