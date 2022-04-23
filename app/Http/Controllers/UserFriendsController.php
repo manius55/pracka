@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Friends;
-use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserFriendsController extends Controller
@@ -29,9 +28,17 @@ class UserFriendsController extends Controller
 
     }
 
-    function delete(int $id, int $userId)
+    function delete(int $id)
     {
+        DB::table('friends')->where([
+            ['user_id', '=', Auth::id()],
+            ['friend_id', '=', $id]
+        ])->delete();
 
+        DB::table('friends')->where([
+            ['user_id', '=', $id],
+            ['friend_id', '=', Auth::id()]
+        ])->delete();
     }
 
     function update(int $if, int $userId)

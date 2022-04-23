@@ -5352,10 +5352,6 @@ __webpack_require__.r(__webpack_exports__);
       type: Boolean,
       "default": false
     },
-    id: {
-      type: Number,
-      "default": null
-    },
     selectedFriend: {
       type: Object,
       "default": null
@@ -5363,12 +5359,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     showModal: function showModal(id) {
-      this.id = id;
       this.selectedFriend = this.friends.find(function (selectedFriend) {
         return selectedFriend.id === id;
       });
-      console.log(this.selectedFriend);
       this.show = !this.show;
+    },
+    deleteFriend: function deleteFriend(id) {
+      axios["delete"]("/friends/".concat(id, "/delete"));
+      $emi;
     }
   }
 });
@@ -34968,10 +34966,13 @@ var render = function () {
       _vm._v(" "),
       _c("modal", {
         key: this.show,
-        attrs: { show: this.show, friend: this.selectedFriend },
+        attrs: { show: this.show },
         on: {
           close: function ($event) {
             return _vm.showModal()
+          },
+          confirm: function ($event) {
+            return _vm.deleteFriend(_vm.selectedFriend.id)
           },
         },
         scopedSlots: _vm._u([
