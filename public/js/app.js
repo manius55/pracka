@@ -5341,10 +5341,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Friends",
   props: {
-    friends: Array
+    friends: Array,
+    show: {
+      type: Boolean,
+      "default": false
+    },
+    id: {
+      type: Number,
+      "default": null
+    },
+    selectedFriend: {
+      type: Object,
+      "default": null
+    }
+  },
+  methods: {
+    showModal: function showModal(id) {
+      this.id = id;
+      this.selectedFriend = this.friends.find(function (selectedFriend) {
+        return selectedFriend.id === id;
+      });
+      console.log(this.selectedFriend);
+      this.show = !this.show;
+    }
   }
 });
 
@@ -10530,7 +10555,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-mask[data-v-53ab54d2] {\n    position: fixed;\n    z-index: 9998;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0, 0, 0, 0.5);\n    display: table;\n    transition: opacity 0.3s ease;\n}\n.modal-wrapper[data-v-53ab54d2] {\n    display: table-cell;\n    vertical-align: middle;\n}\n.modal-container[data-v-53ab54d2] {\n    width: 50%;\n    height: 40%;\n    margin: 0px auto;\n    padding: 20px 30px;\n    background-color: #fff;\n    border-radius: 2px;\n    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\n    transition: all 0.3s ease;\n}\n.modal-header h3[data-v-53ab54d2] {\n    margin-top: 0;\n    color: #42b983;\n}\n.modal-body[data-v-53ab54d2] {\n    margin: 80px 0;\n}\n.modal-default-button[data-v-53ab54d2] {\n}\n.modal-enter-from[data-v-53ab54d2] {\n    opacity: 0;\n}\n.modal-leave-to[data-v-53ab54d2] {\n    opacity: 0;\n}\n.modal-enter-from .modal-container[data-v-53ab54d2],\n.modal-leave-to .modal-container[data-v-53ab54d2] {\n    transform: scale(1.1);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-mask[data-v-53ab54d2] {\n    position: fixed;\n    z-index: 9998;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0, 0, 0, 0.5);\n    display: table;\n    transition: opacity 0.3s ease;\n}\n.modal-wrapper[data-v-53ab54d2] {\n    display: table-cell;\n    vertical-align: middle;\n}\n.modal-container[data-v-53ab54d2] {\n    margin: 0px auto;\n    padding: 20px 30px;\n    background-color: #fff;\n    border-radius: 2px;\n    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\n    transition: all 0.3s ease;\n}\n.modal-header h3[data-v-53ab54d2] {\n    margin-top: 0;\n    color: #42b983;\n}\n.modal-body[data-v-53ab54d2] {\n    margin: 80px 0;\n}\n.modal-default-button[data-v-53ab54d2] {\n}\n.modal-enter-from[data-v-53ab54d2] {\n    opacity: 0;\n}\n.modal-leave-to[data-v-53ab54d2] {\n    opacity: 0;\n}\n.modal-enter-from .modal-container[data-v-53ab54d2],\n.modal-leave-to .modal-container[data-v-53ab54d2] {\n    transform: scale(1.1);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -34926,13 +34951,50 @@ var render = function () {
             [_c("strong", { staticClass: "h5" }, [_vm._v(_vm._s(friend.name))])]
           ),
           _vm._v(" "),
-          _c("button", { staticClass: "btn btn-danger col-1" }, [
-            _vm._v("Usuń"),
-          ]),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-danger col-1",
+              on: {
+                click: function ($event) {
+                  return _vm.showModal(friend.id)
+                },
+              },
+            },
+            [_vm._v("Usuń")]
+          ),
         ])
       }),
       _vm._v(" "),
-      _c("modal", { attrs: { show: true } }),
+      _c("modal", {
+        key: this.show,
+        attrs: { show: this.show, friend: this.selectedFriend },
+        on: {
+          close: function ($event) {
+            return _vm.showModal()
+          },
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "header",
+            fn: function () {
+              return [_vm._v(" Usuwanie Przyjaciela")]
+            },
+            proxy: true,
+          },
+          {
+            key: "body",
+            fn: function () {
+              return [
+                _vm._v(" Czy na pewno chcesz usunąć z przyjaciół użytkownika "),
+                _c("strong", [_vm._v(_vm._s(_vm.selectedFriend.name))]),
+                _vm._v(" ? "),
+              ]
+            },
+            proxy: true,
+          },
+        ]),
+      }),
     ],
     2
   )
@@ -34964,7 +35026,7 @@ var render = function () {
     _vm.show
       ? _c("div", { staticClass: "modal-mask" }, [
           _c("div", { staticClass: "modal-wrapper" }, [
-            _c("div", { staticClass: "modal-container" }, [
+            _c("div", { staticClass: "modal-container col-6" }, [
               _c(
                 "div",
                 { staticClass: "modal-header h5" },
@@ -34998,10 +35060,10 @@ var render = function () {
                       _c(
                         "button",
                         {
-                          staticClass: "btn btn-success col-1",
+                          staticClass: "btn btn-success col-2",
                           on: {
                             click: function ($event) {
-                              return _vm.$emit("close")
+                              return _vm.$emit("confirm")
                             },
                           },
                         },
@@ -35015,7 +35077,7 @@ var render = function () {
                       _c(
                         "button",
                         {
-                          staticClass: "btn btn-danger col-1",
+                          staticClass: "btn btn-danger col-2",
                           on: {
                             click: function ($event) {
                               return _vm.$emit("close")

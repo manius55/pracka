@@ -2,7 +2,7 @@
     <Transition name="modal">
         <div v-if="show" class="modal-mask">
             <div class="modal-wrapper">
-                <div class="modal-container">
+                <div class="modal-container col-6">
                     <div class="modal-header h5">
                         <slot name="header">Usuwanie</slot>
                     </div>
@@ -14,14 +14,14 @@
                     <div class="modal-footer">
                         <slot name="footer">
                             <button
-                                class="btn btn-success col-1"
-                                @click="$emit('close')"
+                                class="btn btn-success col-2"
+                                @click="$emit('confirm')"
                             >
                                 Tak
                             </button>
 
                             <button
-                                class="btn btn-danger col-1"
+                                class="btn btn-danger col-2"
                                 @click="$emit('close')"
                             >
                                 Anuluj
@@ -38,7 +38,7 @@
 export default {
     name: "Modal",
     props: {
-        show: Boolean
+        show: Boolean,
     }
 }
 </script>
@@ -62,8 +62,6 @@ export default {
 }
 
 .modal-container {
-    width: 50%;
-    height: 40%;
     margin: 0px auto;
     padding: 20px 30px;
     background-color: #fff;
