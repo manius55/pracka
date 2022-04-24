@@ -39,6 +39,7 @@ class UserFriendsController extends Controller
             ['user_id', '=', $id],
             ['friend_id', '=', Auth::id()]
         ])->delete();
+        
     }
 
     function update(int $if, int $userId)

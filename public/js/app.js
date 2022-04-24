@@ -5344,6 +5344,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Friends",
   props: {
@@ -5366,8 +5367,18 @@ __webpack_require__.r(__webpack_exports__);
     },
     deleteFriend: function deleteFriend(id) {
       axios["delete"]("/friends/".concat(id, "/delete"));
-      $emi;
+      this.show = !this.show;
+      this.$emit('confirm');
+      location.reload();
+    },
+    render: function render() {
+      this.keyRender++;
     }
+  },
+  data: function data() {
+    return {
+      keyRender: 0
+    };
   }
 });
 
@@ -34937,6 +34948,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { key: _vm.keyRender },
     [
       _vm._l(_vm.friends, function (friend) {
         return _c("div", { staticClass: "row my-3" }, [

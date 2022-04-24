@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :key="keyRender">
             <div v-for="friend in friends" class="row my-3">
                 <div class="col-2 border rounded mx-2" style="text-justify: auto ">
                    <strong class="h5">{{ friend.name }}</strong>
@@ -13,7 +13,9 @@
     </div>
 </template>
 
+
 <script>
+
 export default {
     name: "Friends",
     props: {
@@ -34,9 +36,19 @@ export default {
         },
         deleteFriend(id) {
             axios.delete(`/friends/${id}/delete`)
-            $emi
+            this.show = !this.show
+            this.$emit('confirm')
+            location.reload()
+        },
+        render() {
+            this.keyRender++
         }
     },
+    data() {
+        return {
+            keyRender: 0
+        }
+    }
 }
 </script>
 
