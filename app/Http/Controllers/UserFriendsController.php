@@ -25,7 +25,14 @@ class UserFriendsController extends Controller
 
     function create(int $id)
     {
-
+        Friends::create([
+            'user_id' => Auth::id(),
+            'friend_id' => $id
+        ]);
+        Friends::create([
+            'user_id' => $id,
+            'friend_id' => Auth::id()
+        ]);
     }
 
     function delete(int $id)
@@ -39,7 +46,7 @@ class UserFriendsController extends Controller
             ['user_id', '=', $id],
             ['friend_id', '=', Auth::id()]
         ])->delete();
-        
+
     }
 
     function update(int $if, int $userId)

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserFriendsController;
+use \App\Http\Controllers\InvitationsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,10 +24,13 @@ Auth::routes();
 
 Route::get('/profile/{id}', [ProfileController::class, 'get'] );
 Route::get('/profile/{id}/edit/form', [ProfileController::class, 'editForm']);
+Route::put('/profile/{id}/edit', [ProfileController::class, 'edit']);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/friends/{id}', [UserFriendsController::class, 'get']);
 Route::delete('/friends/{id}/delete', [UserFriendsController::class, 'delete']);
 
-Route::put('/profile/{id}/edit', [ProfileController::class, 'edit']);
+Route::post('/invitations/{name}', [InvitationsController::class, 'sendIvitation']);
+
+Route::get('/invitations', [InvitationsController::class, 'getInvitations']);
