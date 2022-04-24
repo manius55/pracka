@@ -34,5 +34,7 @@ Route::delete('/friends/{id}/delete', [UserFriendsController::class, 'delete']);
 
 Route::post('/invitations/{name}', [InvitationsController::class, 'sendIvitation']);
 Route::get('/invitations', [InvitationsController::class, 'getInvitations']);
+Route::get('/myInvitations', [InvitationsController::class, 'getMyInvitations']);
 Route::put('/invitations/{id}', [InvitationsController::class, 'update']);
 Route::delete('/invitations/{id}', [InvitationsController::class, 'delete']);
+Route::delete('/myInvitations/{id}', [InvitationsController::class, 'deleteMyInvitation']);

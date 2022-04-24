@@ -28,11 +28,33 @@ class InvitationsController extends Controller
         ]);
     }
 
+    public function getMyInvitations()
+    {
+        $invitationsId = DB::table('invitations')->where([
+            ['from_user', '=', Auth::id()],
+            ['accepted', '=', false]
+        ])->pluck('to_user')->toArray();
+
+        $invitationsUsers = DB::table('users')->whereIn('id', $invitationsId)->get();
+
+        return view('myInvitations', [
+            'users' => $invitationsUsers
+        ]);
+    }
+
     public function delete(int $id)
     {
         $invitation = DB::table('invitations')->where([
            ['from_user', '=' , $id],
            ['to_user', '=', Auth::id()]
+        ])->delete();
+    }
+
+    public function deleteMyInvitation(int $id)
+    {
+        $invitation = DB::table('invitations')->where([
+            ['from_user', '=' , Auth::id()],
+            ['to_user', '=', $id]
         ])->delete();
     }
 

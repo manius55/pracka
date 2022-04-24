@@ -47,6 +47,11 @@ class UserFriendsController extends Controller
             ['friend_id', '=', Auth::id()]
         ])->delete();
 
+         DB::table('invitations')->where([
+            ['from_user', '=' , $id],
+            ['to_user', '=', Auth::id()]
+        ])->delete();
+
     }
 
     function update(int $if, int $userId)
