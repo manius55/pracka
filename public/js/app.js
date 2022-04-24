@@ -5520,7 +5520,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     cancel: function cancel(id) {
-      console.log('wykonuje się');
       axios["delete"]("/myInvitations/".concat(id));
       location.reload();
     }

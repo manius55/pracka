@@ -21,7 +21,6 @@ export default {
     },
     methods: {
         cancel(id){
-            console.log('wykonuje się')
             axios.delete(`/myInvitations/${id}`)
             location.reload()
         }
