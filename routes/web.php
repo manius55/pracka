@@ -29,8 +29,10 @@ Route::put('/profile/{id}/edit', [ProfileController::class, 'edit']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/friends/{id}', [UserFriendsController::class, 'get']);
+Route::post('/friends/{id}', [UserFriendsController::class, 'create']);
 Route::delete('/friends/{id}/delete', [UserFriendsController::class, 'delete']);
 
 Route::post('/invitations/{name}', [InvitationsController::class, 'sendIvitation']);
-
 Route::get('/invitations', [InvitationsController::class, 'getInvitations']);
+Route::put('/invitations/{id}', [InvitationsController::class, 'update']);
+Route::delete('/invitations/{id}', [InvitationsController::class, 'delete']);

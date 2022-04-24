@@ -16,7 +16,11 @@ class InvitationsController extends Controller
 
     public function getInvitations()
     {
-        $invitationsId = DB::table('invitations')->where('to_user', '=', Auth::id())->pluck('from_user')->toArray();
+        $invitationsId = DB::table('invitations')->where([
+            ['to_user', '=', Auth::id()],
+            ['accepted', '=', false]
+        ])->pluck('from_user')->toArray();
+
         $invitationsUsers = DB::table('users')->whereIn('id', $invitationsId)->get();
 
         return view('invitations', [
@@ -32,14 +36,14 @@ class InvitationsController extends Controller
         ])->delete();
     }
 
-    public function accept(int $id)
+    public function update(int $id)
     {
         $invitation = DB::table('invitations')->where([
             ['from_user', '=' , $id],
             ['to_user', '=', Auth::id()]
-        ])->first();
-
-        $invitation->accepted = true;
-        $invitation->save();
+        ])->update([
+            'accepted' => true
+        ]);
+        dump($invitation);
     }
 }

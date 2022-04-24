@@ -5410,11 +5410,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "InvitationsList",
   props: {
-    users: Array
+    users: Array,
+    id: {
+      type: Number,
+      "default": null
+    }
   },
   methods: {
-    confirm: function confirm() {},
-    cancel: function cancel() {}
+    confirm: function confirm(id) {
+      axios.put("/invitations/".concat(id));
+      axios.post("/friends/".concat(id));
+      location.reload();
+    },
+    cancel: function cancel(id) {
+      axios["delete"]("/invitations/".concat(id));
+      location.reload();
+    }
   }
 });
 
@@ -35157,13 +35168,31 @@ var render = function () {
           [_c("strong", { staticClass: "h5" }, [_vm._v(_vm._s(user.name))])]
         ),
         _vm._v(" "),
-        _c("button", { staticClass: "btn btn-success col-1" }, [
-          _vm._v("Akceptuj"),
-        ]),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success col-1",
+            on: {
+              click: function ($event) {
+                return _vm.confirm(user.id)
+              },
+            },
+          },
+          [_vm._v("Akceptuj")]
+        ),
         _vm._v(" "),
-        _c("button", { staticClass: "btn btn-danger col-1" }, [
-          _vm._v("Odrzuć"),
-        ]),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-danger col-1",
+            on: {
+              click: function ($event) {
+                return _vm.cancel(user.id)
+              },
+            },
+          },
+          [_vm._v("Odrzuć")]
+        ),
       ])
     }),
     0

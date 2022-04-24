@@ -15,5 +15,7 @@ class Friends extends Model
 
     protected $primaryKey = ['user_id', 'friend_id'];
 
+    protected $fillable = ['user_id', 'friend_id'];
+
     public $incrementing = false;
 }
