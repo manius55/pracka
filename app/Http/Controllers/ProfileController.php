@@ -29,20 +29,22 @@ class ProfileController extends Controller
     {
         $data = $request->request->all();
 
-        $uId = uniqid();
-
-        $name = $request->file('image')->getClientOriginalName();
-        $nameAndExt = explode('.', $name);
-        $ext = end($nameAndExt);
-        $file = $request->file('image')->move('/home/manius55/projects/PracaInzynierska/chat-app/resources/avatars', $uId . '.' . $ext);
-
         $profile = UserProfile::where('user_id', '=', $id)->first();
 
+        if($request->hasFile('image'))
+        {
+            $name = $request->file('image')->getClientOriginalName();
+            $nameAndExt = explode('.', $name);
+            $ext = end($nameAndExt);
+            $uId = uniqid();
+            $file = $request->file('image')->move('/home/manius55/projects/PracaInzynierska/chat-app/resources/avatars', $uId . '.' . $ext);
+            $profile->image = $uId;
+        }
 
         $profile->description = $data['description'];
         $profile->date_of_birth = $data['date_of_birth'];
-        $profile->image = $uId;
         $profile->save();
+
         return redirect('/profile/' . $id);
     }
 }
