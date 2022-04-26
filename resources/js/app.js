@@ -20,6 +20,7 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('add-avatar', require('./components/AddAvatar.vue').default);
 Vue.component('friends', require('./components/Friends.vue').default);
 Vue.component('modal', require('./components/Modal.vue').default);
 Vue.component('invitations-list', require('./components/InvitationsList.vue').default);

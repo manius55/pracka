@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="h3 my-4">Profile edit</div>
-    <form action="{{ url('/profile/' . Auth::id()  . '/edit')}}" method="post" enctype="multipart/form-data">
+    <form action="{{ url('/profile/' . Auth::id()  . '/edit')}}" method="post">
         @csrf
         @method('put')
         <div class="row my-2">
@@ -18,8 +18,7 @@
                 <input type="date" name="date_of_birth" id="date_of_birth" class="rounded" value="{{ $profile->date_of_birth }}">
             </div>
         </div>
-        <label for="image" class="col-1">Avatar</label>
-        <input type="file" id="image" alt="avatar" name="image">
+        <add-avatar></add-avatar>
         <div class="row my-4">
             <div>
                 <button type="submit" class="btn btn-success col-1 rounded">Save</button>
