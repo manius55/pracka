@@ -17,7 +17,7 @@ class CreateUserProfilesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('description', 250)->nullable();
-            $table->string('image')->nullable();
+            $table->string('image')->nullable()->unique();
             $table->date('date_of_birth')->nullable();
             $table->integer('user_id')->unsigned()->nullable();
         });

@@ -18,7 +18,8 @@
                 <input type="date" name="date_of_birth" id="date_of_birth" class="rounded" value="{{ $profile->date_of_birth }}">
             </div>
         </div>
-        <add-avatar></add-avatar>
+        <label for="image" class="col-1">Avatar</label>
+        <input type="file" id="image" alt="avatar" name="image">
         <div class="row my-4">
             <div>
                 <button type="submit" class="btn btn-success col-1 rounded">Save</button>
