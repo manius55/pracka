@@ -34,6 +34,9 @@ class ProfileController extends Controller
 
         if($request->hasFile('image'))
         {
+            $validated = $request->validate([
+                'image' => 'required|image|mimes:jpg,png,jpeg'
+            ]);
             $name = $request->file('image')->getClientOriginalName();
             $nameAndExt = explode('.', $name);
             $ext = end($nameAndExt);
@@ -42,7 +45,7 @@ class ProfileController extends Controller
 
             if(File::exists('images/' . $profile->image))
                 File::delete('images/' . $profile->image);
-            
+
             $profile->image = $uId . '.' . $ext;
         }
 

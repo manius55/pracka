@@ -19,7 +19,12 @@
             </div>
         </div>
         <label for="image" class="col-1">Avatar</label>
-        <input type="file" id="image" alt="avatar" name="image">
+        <input type="file" id="image" alt="avatar" name="image" class="@error('image')is-invalid @enderror">
+        @error('image')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
         <div class="row my-4">
             <div>
                 <button type="submit" class="btn btn-success col-1 rounded">Save</button>
