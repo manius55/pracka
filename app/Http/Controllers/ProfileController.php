@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class ProfileController extends Controller
 {
@@ -37,8 +38,12 @@ class ProfileController extends Controller
             $nameAndExt = explode('.', $name);
             $ext = end($nameAndExt);
             $uId = uniqid();
-            $file = $request->file('image')->move('/home/manius55/projects/PracaInzynierska/chat-app/resources/avatars', $uId . '.' . $ext);
-            $profile->image = $uId;
+            $request->file('image')->move('images', $uId . '.' . $ext);
+
+            if(File::exists('images/' . $profile->image))
+                File::delete('images/' . $profile->image);
+            
+            $profile->image = $uId . '.' . $ext;
         }
 
         $profile->description = $data['description'];

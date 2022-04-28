@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="h3 my-4">Profile edit</div>
-    <form action="{{ url('/profile/' . Auth::id()  . '/edit')}}" method="post">
+    <form action="{{ url('/profile/' . Auth::id()  . '/edit')}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
         <div class="row my-2">

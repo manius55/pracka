@@ -11,10 +11,10 @@
             <div class="row justify-content-center">
                 <div class="col-6">
                     <img
-                        src="https://play-lh.googleusercontent.com/ByaDki7oQ9RZJV2XRVgRUCAHmM6aqApy4TLAiDx4MG2BVtr2ijknHf2taM76CjFBpdc"
+                        src="{{asset('images/' . $profile->image)}}"
                         alt="naruto"
                         class="rounded-circle mx-auto d-flex"
-                        style="width: 25%"
+                        style="width: 100px; height: 100px"
                     >
                 </div>
             </div>
