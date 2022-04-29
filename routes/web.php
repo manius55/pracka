@@ -32,7 +32,7 @@ Route::get('/friends/{id}', [UserFriendsController::class, 'get']);
 Route::post('/friends/{id}', [UserFriendsController::class, 'create']);
 Route::delete('/friends/{id}/delete', [UserFriendsController::class, 'delete']);
 
-Route::post('/invitations/{name}', [InvitationsController::class, 'sendIvitation']);
+Route::post('/invitations/{name}', [InvitationsController::class, 'sendInvitation']);
 Route::get('/invitations', [InvitationsController::class, 'getInvitations']);
 Route::get('/myInvitations', [InvitationsController::class, 'getMyInvitations']);
 Route::put('/invitations/{id}', [InvitationsController::class, 'update']);

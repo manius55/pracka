@@ -5251,6 +5251,91 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AddFriend.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AddFriend.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "AddFriend",
+  props: {
+    show: {
+      type: Boolean,
+      "default": false
+    },
+    name: {
+      type: String,
+      "default": ''
+    },
+    users: {
+      type: Array,
+      "default": []
+    }
+  },
+  methods: {
+    showModal: function showModal() {
+      this.show = !this.show;
+    },
+    sendInvitation: function sendInvitation() {
+      var _this = this;
+
+      this.name = document.getElementById('friend').value;
+
+      if (this.users.find(function (x) {
+        return x.name === _this.name;
+      })) {
+        axios.post("/invitations/".concat(this.name));
+      }
+
+      this.showModal();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
@@ -5446,6 +5531,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Modal",
   props: {
@@ -5525,6 +5614,7 @@ Vue.component('friends', (__webpack_require__(/*! ./components/Friends.vue */ ".
 Vue.component('modal', (__webpack_require__(/*! ./components/Modal.vue */ "./resources/js/components/Modal.vue")["default"]));
 Vue.component('invitations-list', (__webpack_require__(/*! ./components/InvitationsList.vue */ "./resources/js/components/InvitationsList.vue")["default"]));
 Vue.component('my-invitations-list', (__webpack_require__(/*! ./components/MyInvitationsList.vue */ "./resources/js/components/MyInvitationsList.vue")["default"]));
+Vue.component('add-friend', (__webpack_require__(/*! ./components/AddFriend.vue */ "./resources/js/components/AddFriend.vue")["default"]));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -34588,6 +34678,45 @@ module.exports = function (list, options) {
 
 /***/ }),
 
+/***/ "./resources/js/components/AddFriend.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/components/AddFriend.vue ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _AddFriend_vue_vue_type_template_id_73901578_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddFriend.vue?vue&type=template&id=73901578&scoped=true& */ "./resources/js/components/AddFriend.vue?vue&type=template&id=73901578&scoped=true&");
+/* harmony import */ var _AddFriend_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddFriend.vue?vue&type=script&lang=js& */ "./resources/js/components/AddFriend.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AddFriend_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddFriend_vue_vue_type_template_id_73901578_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AddFriend_vue_vue_type_template_id_73901578_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "73901578",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AddFriend.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/ExampleComponent.vue":
 /*!******************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue ***!
@@ -34785,6 +34914,22 @@ component.options.__file = "resources/js/components/MyInvitationsList.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/AddFriend.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/AddFriend.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddFriend_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AddFriend.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AddFriend.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddFriend_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
@@ -34878,6 +35023,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/AddFriend.vue?vue&type=template&id=73901578&scoped=true&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/AddFriend.vue?vue&type=template&id=73901578&scoped=true& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddFriend_vue_vue_type_template_id_73901578_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddFriend_vue_vue_type_template_id_73901578_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddFriend_vue_vue_type_template_id_73901578_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AddFriend.vue?vue&type=template&id=73901578&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AddFriend.vue?vue&type=template&id=73901578&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&":
 /*!*************************************************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e& ***!
@@ -34959,6 +35121,124 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyInvitationsList_vue_vue_type_template_id_ee8030de_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyInvitationsList_vue_vue_type_template_id_ee8030de_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MyInvitationsList.vue?vue&type=template&id=ee8030de&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MyInvitationsList.vue?vue&type=template&id=ee8030de&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AddFriend.vue?vue&type=template&id=73901578&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AddFriend.vue?vue&type=template&id=73901578&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "row justify-content-end" }, [
+        _c(
+          "div",
+          {
+            staticClass: "col-2 btn btn-primary",
+            on: {
+              click: function ($event) {
+                return _vm.showModal()
+              },
+            },
+          },
+          [_vm._v("\n            Dodaj przyjaciela\n        ")]
+        ),
+      ]),
+      _vm._v(" "),
+      _c("modal", {
+        key: this.show,
+        attrs: { show: this.show },
+        on: {
+          close: function ($event) {
+            return _vm.showModal()
+          },
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "header",
+            fn: function () {
+              return [_vm._v("\n            Dodawanie przyjaciela\n        ")]
+            },
+            proxy: true,
+          },
+          {
+            key: "body",
+            fn: function () {
+              return [
+                _c("div", { staticClass: "form-group text-start" }, [
+                  _c("label", { attrs: { for: "friend" } }, [
+                    _vm._v("Nick zapraszanego przyjaciela:"),
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "rounded form-control",
+                    attrs: {
+                      type: "text",
+                      id: "friend",
+                      placeholder: "wprowadź nick",
+                    },
+                  }),
+                ]),
+              ]
+            },
+            proxy: true,
+          },
+          {
+            key: "footer",
+            fn: function () {
+              return [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success col-2",
+                    on: {
+                      click: function ($event) {
+                        return _vm.sendInvitation()
+                      },
+                    },
+                  },
+                  [_vm._v("\n                Zaproś\n            ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger col-2",
+                    on: {
+                      click: function ($event) {
+                        return _vm.showModal()
+                      },
+                    },
+                  },
+                  [_vm._v("\n                Anuluj\n            ")]
+                ),
+              ]
+            },
+            proxy: true,
+          },
+        ]),
+      }),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
 
 
 /***/ }),
@@ -35200,11 +35480,15 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "modal-body h4 text-center" },
+                { staticClass: "modal-body" },
                 [
                   _vm._t("body", function () {
                     return [
-                      _vm._v("Czy na pewno chcesz usunąć użytkownika abc?"),
+                      _c("div", { staticClass: "h4 text-center" }, [
+                        _vm._v(
+                          "\n                        Czy na pewno chcesz usunąć użytkownika abc?\n                        "
+                        ),
+                      ]),
                     ]
                   }),
                 ],
@@ -35213,7 +35497,7 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "modal-footer" },
+                { staticClass: "modal-footer justify-content-between" },
                 [
                   _vm._t("footer", function () {
                     return [

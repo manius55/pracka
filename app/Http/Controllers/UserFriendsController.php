@@ -18,8 +18,11 @@ class UserFriendsController extends Controller
         }
 
         $friendsUsers = DB::table('users')->whereIn('id', $friendsIds)->get();
+        $users = DB::table('users')->get()->toArray();
+
         return view('friends', [
-            'friends' => $friendsUsers
+            'friends' => $friendsUsers,
+            'users' => $users
         ]);
     }
 

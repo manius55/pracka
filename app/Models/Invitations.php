@@ -12,4 +12,10 @@ class Invitations extends Model
     protected $primaryKey = ['from_user', 'to_user'];
 
     public $incrementing = false;
+
+    protected $fillable = [
+        'from_user',
+        'to_user',
+        'accepted'
+    ];
 }

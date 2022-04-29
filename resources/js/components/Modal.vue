@@ -7,11 +7,15 @@
                         <slot name="header">Usuwanie</slot>
                     </div>
 
-                    <div class="modal-body h4 text-center">
-                        <slot name="body">Czy na pewno chcesz usunąć użytkownika abc?</slot>
+                    <div class="modal-body">
+                        <slot name="body">
+                            <div class="h4 text-center">
+                            Czy na pewno chcesz usunąć użytkownika abc?
+                            </div>
+                        </slot>
                     </div>
 
-                    <div class="modal-footer">
+                    <div class="modal-footer justify-content-between">
                         <slot name="footer">
                             <button
                                 class="btn btn-success col-2"

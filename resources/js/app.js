@@ -24,6 +24,7 @@ Vue.component('friends', require('./components/Friends.vue').default);
 Vue.component('modal', require('./components/Modal.vue').default);
 Vue.component('invitations-list', require('./components/InvitationsList.vue').default);
 Vue.component('my-invitations-list', require('./components/MyInvitationsList.vue').default);
+Vue.component('add-friend', require('./components/AddFriend.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

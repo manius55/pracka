@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invitations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class InvitationsController extends Controller
 {
-    public function sendIvitation(string $name)
+    public function sendInvitation(string $name)
     {
-        $user = DB::table('users')->where('name', '=', $name);
-        dd($user);
+        $user = DB::table('users')->where('name', '=', $name)->first();
+        if (DB::table('friends')->where('friend_id', '=', $user->id)->doesntExist())
+        {
+            Invitations::create([
+                'from_user' => Auth::id(),
+                'to_user' => $user->id,
+                'accepted' => false,
+            ]);
+        }
     }
 
     public function getInvitations()
