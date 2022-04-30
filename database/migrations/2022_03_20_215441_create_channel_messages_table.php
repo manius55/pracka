@@ -18,7 +18,9 @@ class CreateChannelMessagesTable extends Migration
             $table->timestamps();
             $table->integer('channel_id')->unsigned();
             $table->integer('from_user_id')->unsigned();
-            $table->integer('message_id')->unsigned();
+            $table->foreign('channel_id')->references('id')->on('channels');
+            $table->foreign('from_user_id')->references('id')->on('users');
+            $table->string('message');
         });
     }
 

@@ -17,6 +17,7 @@ class CreateChannelsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('channelName');
+            $table->string('image');
         });
     }
 

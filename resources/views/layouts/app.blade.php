@@ -23,7 +23,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{url('/chat')}}">Kanały</a>
+                <a class="navbar-brand" href="{{url('/channel')}}">Kanały</a>
                 <a class="navbar-brand" href="{{url('/friends/' . Auth::id())}}">Lista znajomych</a>
                 <a class="navbar-brand" href="{{url('/invitations')}}">Otrzymane zaproszenia</a>
                 <a class="navbar-brand" href="{{url('/myInvitations')}}">Wysłane zaproszenia</a>

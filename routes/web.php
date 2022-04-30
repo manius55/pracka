@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserFriendsController;
 use \App\Http\Controllers\InvitationsController;
+use App\Http\Controllers\ChannelController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,3 +39,5 @@ Route::get('/myInvitations', [InvitationsController::class, 'getMyInvitations'])
 Route::put('/invitations/{id}', [InvitationsController::class, 'update']);
 Route::delete('/invitations/{id}', [InvitationsController::class, 'delete']);
 Route::delete('/myInvitations/{id}', [InvitationsController::class, 'deleteMyInvitation']);
+
+Route::get('/channel', [ChannelController::class, 'index']);

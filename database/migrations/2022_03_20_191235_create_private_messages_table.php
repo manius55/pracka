@@ -18,7 +18,9 @@ class CreatePrivateMessagesTable extends Migration
             $table->timestamps();
             $table->integer('from_user_id')->unsigned();
             $table->integer('to_user_id')->unsigned();
-            $table->integer('message_id');
+            $table->foreign('from_user_id')->references('id')->on('users');
+            $table->foreign('to_user_id')->references('id')->on('users');
+            $table->string('message');
         });
     }
 
