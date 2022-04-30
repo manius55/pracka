@@ -20,9 +20,22 @@ class UserFriendsController extends Controller
         $friendsUsers = DB::table('users')->whereIn('id', $friendsIds)->get();
         $users = DB::table('users')->get()->toArray();
 
+        $invitations = DB::table('invitations')->where([
+            ['to_user', '=', Auth::id()],
+            ['accepted', '=', false]
+        ])->pluck('from_user')->toArray();
+
+        $invited = DB::table('invitations')->where([
+            ['from_user', '=', Auth::id()],
+            ['accepted', '=', false]
+        ])->pluck('to_user')->toArray();
+
+
         return view('friends', [
             'friends' => $friendsUsers,
-            'users' => $users
+            'users' => $users,
+            'invitations' => $invitations,
+            'invited' => $invited
         ]);
     }
 

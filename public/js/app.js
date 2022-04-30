@@ -5298,6 +5298,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AddFriend",
   props: {
@@ -5312,6 +5313,18 @@ __webpack_require__.r(__webpack_exports__);
     users: {
       type: Array,
       "default": []
+    },
+    friends: {
+      type: Array,
+      "default": []
+    },
+    invitations: {
+      type: Array,
+      "default": []
+    },
+    invited: {
+      type: Array,
+      "default": []
     }
   },
   methods: {
@@ -5322,14 +5335,42 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.name = document.getElementById('friend').value;
-
-      if (this.users.find(function (x) {
+      var user = this.users.find(function (x) {
         return x.name === _this.name;
-      })) {
-        axios.post("/invitations/".concat(this.name));
+      });
+      var userExist = this.users.find(function (x) {
+        return x.name === _this.name;
+      });
+
+      if (userExist) {
+        var userIsFriend = this.friends.find(function (x) {
+          return x.id === user.id;
+        });
+        var userAlreadyInvited = this.invited.includes(user.id);
+        var userInvitedMe = this.invitations.includes(user.id);
+
+        if (userIsFriend) {
+          this.alert('Użytkownik już jest na liście przyjaciół!', 'danger');
+        } else if (userAlreadyInvited) {
+          this.alert('Użytkownik został już wcześniej zaproszony!', 'danger');
+        } else if (userInvitedMe) {
+          this.alert('Zaproszenie od danego użytkownika oczekuja na twoją akceptację', 'danger');
+        } else {
+          axios.post("/invitations/".concat(this.name));
+          this.invited.push(userExist.id);
+          this.alert('Wysłano zaproszenie!', 'success');
+        }
+      } else {
+        this.alert('Nie znaleziono użytkownika!', 'danger');
       }
 
       this.showModal();
+    },
+    alert: function alert(message, type) {
+      var alertPlaceholder = document.getElementById('AlertPlaceholder');
+      var alertDiv = document.createElement('div');
+      alertDiv.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+      alertPlaceholder.append(alertDiv);
     }
   }
 });
@@ -5382,6 +5423,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
 //
 //
 //
@@ -35144,6 +35189,8 @@ var render = function () {
   return _c(
     "div",
     [
+      _c("div", { attrs: { id: "AlertPlaceholder" } }),
+      _vm._v(" "),
       _c("div", { staticClass: "row justify-content-end" }, [
         _c(
           "div",
@@ -35360,9 +35407,13 @@ var render = function () {
             key: "body",
             fn: function () {
               return [
-                _vm._v(" Czy na pewno chcesz usunąć z przyjaciół użytkownika "),
-                _c("strong", [_vm._v(_vm._s(_vm.selectedFriend.name))]),
-                _vm._v(" ? "),
+                _c("div", { staticClass: "h5" }, [
+                  _vm._v(
+                    "\n                Czy na pewno chcesz usunąć z przyjaciół użytkownika "
+                  ),
+                  _c("strong", [_vm._v(_vm._s(_vm.selectedFriend.name))]),
+                  _vm._v(" ?\n            "),
+                ]),
               ]
             },
             proxy: true,

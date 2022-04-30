@@ -8,7 +8,11 @@
             </div>
         <modal :show="this.show" :key="this.show" @close="showModal()" @confirm="deleteFriend(selectedFriend.id)" >
             <template #header> Usuwanie Przyjaciela</template>
-            <template #body> Czy na pewno chcesz usunąć z przyjaciół użytkownika <strong>{{ selectedFriend.name }}</strong> ? </template>
+            <template #body>
+                <div class="h5">
+                    Czy na pewno chcesz usunąć z przyjaciół użytkownika <strong>{{ selectedFriend.name }}</strong> ?
+                </div>
+            </template>
         </modal>
     </div>
 </template>
