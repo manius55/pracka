@@ -10,12 +10,21 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-6">
+                    @if($profile->image !== null)
                     <img
-                        src="{{asset('images/' . $profile->image)}}"
-                        alt="naruto"
+                        src="{{asset('storage/img/' . $profile->image)}}"
+                        alt="avatar"
                         class="rounded-circle mx-auto d-flex"
                         style="width: 100px; height: 100px"
                     >
+                    @else
+                        <img
+                            src="{{asset('storage/img/default.png')}}"
+                            alt="avatar"
+                            class="rounded-circle mx-auto d-flex"
+                            style="width: 100px; height: 100px"
+                        >
+                    @endif
                 </div>
             </div>
             <div class="row justify-content-center py-2">

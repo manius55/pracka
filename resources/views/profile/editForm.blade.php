@@ -9,17 +9,17 @@
         <div class="row my-2">
             <div>
                 <label for="description" class="col-1"><strong>Description:</strong></label>
-                <input type="text" name="description" id="description" value="{{ $profile->description }}" class="col-6 rounded-1">
+                <input type="text" name="description" id="description" value="{{ $profile->description }}" class="col-6 form-control" style="width: 50%">
             </div>
         </div>
         <div class="row my-2">
             <div>
                 <label for="date_of_birth" class="col-1"><strong>Date of birth:</strong></label>
-                <input type="date" name="date_of_birth" id="date_of_birth" class="rounded" value="{{ $profile->date_of_birth }}">
+                <input type="date" name="date_of_birth" id="date_of_birth" class="form-control" value="{{ $profile->date_of_birth }}" style="width: 25%">
             </div>
         </div>
-        <label for="image" class="col-1">Avatar</label>
-        <input type="file" id="image" alt="avatar" name="image" class="@error('image')is-invalid @enderror">
+        <label for="image" class="col-1"><strong>Avatar:</strong></label>
+        <input type="file" id="image" alt="avatar" name="image" class="@error('image')is-invalid @enderror form-control" style="width: 50%">
         @error('image')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>

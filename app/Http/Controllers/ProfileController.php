@@ -41,10 +41,10 @@ class ProfileController extends Controller
             $nameAndExt = explode('.', $name);
             $ext = end($nameAndExt);
             $uId = uniqid();
-            $request->file('image')->move('images', $uId . '.' . $ext);
+            $request->file('image')->move(public_path('storage/img'), $uId . '.' . $ext);
 
-            if(File::exists('images/' . $profile->image))
-                File::delete('images/' . $profile->image);
+            if(File::exists(public_path('storage/img' . $profile->image)))
+                File::delete(public_path('storage/img' . $profile->image));
 
             $profile->image = $uId . '.' . $ext;
         }

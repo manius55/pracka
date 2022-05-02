@@ -25,6 +25,9 @@ Vue.component('modal', require('./components/Modal.vue').default);
 Vue.component('invitations-list', require('./components/InvitationsList.vue').default);
 Vue.component('my-invitations-list', require('./components/MyInvitationsList.vue').default);
 Vue.component('add-friend', require('./components/AddFriend.vue').default);
+Vue.component('new-message', require('./components/NewMessage.vue').default);
+Vue.component('messages', require('./components/Messages.vue').default);
+Vue.component('channels', require('./components/Channels.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -33,4 +36,28 @@ Vue.component('add-friend', require('./components/AddFriend.vue').default);
 
 const app = new Vue({
     el: '#app',
+    data: {
+        messages: []
+    },
+    created() {
+        this.messagesWithUser();
+        window.Echo.private('channel')
+            .listen('MessageSent', (e) => {
+                this.messages.push({
+                    message: e.channelMessage.message,
+                    user: e.user
+                });
+            });
+    },
+    methods: {
+        messagesWithUser() {
+            axios.get('/messages').then(response => {
+                this.messages = response.data;
+            });
+        },
+        newMessage(message) {
+            this.messages.push(message);
+            axios.post('/messages', message)
+        }
+    }
 });

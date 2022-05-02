@@ -70,10 +70,12 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-
+        $user->update(['user_profile_id' => $user->id]);
+        dd($user);
         $profile = UserProfile::create([
             'user_id' => $user['id']
         ]);
+
         return $user;
     }
 }

@@ -9,13 +9,19 @@ class ChannelMessages extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'channel_id',
+        'from_user_id',
+        'message'
+    ];
+
     public function user()
     {
-        return $this->hasOne(User::class, 'from_user_id');
+        return $this->belongsTo(User::class, 'from_user_id');
     }
 
     public function channel()
     {
-        return $this->hasOne(Channels::class);
+        return $this->belongsTo(Channels::class);
     }
 }
