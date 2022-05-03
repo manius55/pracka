@@ -1,4 +1,4 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html">
     <div>
         <div>
             <ul>
@@ -6,9 +6,10 @@
                     <div v-if="ifMessageFromUser(message.user.id)">
                         <div class="text-end">
                             <div>
-                                <img :src="'/storage/img/' + message.user.image" alt="avatar" style="height: 20px" class="rounded-circle"/>
+                                <small>{{ formatDate(message.created_at) }}</small>
+                                <img :src="'/storage/img/' + message.user.image" alt="avatar" style="height: 20px" class="rounded-circle"/> <ab
                                 <p class="chat-text">
-                                    {{ message.message }}
+                                    <strong>{{ message.message }}</strong>
                                 </p>
                             </div>
                         </div>
@@ -17,13 +18,11 @@
                         <div class="text-start content-start">
                             <div>
                                 <img :src="'/storage/img/' + message.user.image" alt="avatar" style="height: 20px" class="rounded-circle"/>
+                                <small>{{ formatDate(message.created_at) }}</small>
                                 <p class="chat-text">
-                                    {{ message.message }}
+                                    <strong>{{ message.message }}</strong>
                                 </p>
                             </div>
-                            <p>
-                                {{ message.message }}
-                            </p>
                         </div>
                     </div>
                 </li>
@@ -51,6 +50,14 @@ export default {
                 return true
             }
                 return false
+        },
+        formatDate(date) {
+            let DateTime = date.split('T')
+
+            let Date = DateTime[0]
+            let Time = DateTime[1].split(':')
+
+            return Time[0] + ':' + Time[1] + ' ' + Date
         }
     }
 }
@@ -64,12 +71,7 @@ ul {
 }
 .chat-text {
     padding: .4rem 1rem;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
     background: #ffffff;
-    font-weight: 300;
-    line-height: 150%;
     position: relative;
 }
 .chat-avatar {

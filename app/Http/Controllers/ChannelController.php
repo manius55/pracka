@@ -20,8 +20,14 @@ class ChannelController extends Controller
     {
         $userChannels = DB::table('user_channels')->where('user_id', '=', Auth::id())->pluck('channel_id')->toArray();
         $channels = DB::table('channels')->whereIn('id', $userChannels)->get();
+
+        $user = User::where('id', '=', Auth::id())->first()->toArray();
+        $image = DB::table('user_profiles')->where('user_id', '=', Auth::id())->first();
+        $user['image'] = $image->image;
+
         return view('channels.channel',[
-            'channels' => $channels
+            'channels' => $channels,
+            'user' => $user
         ]);
     }
     public function newMessage(Request $request)
@@ -34,8 +40,8 @@ class ChannelController extends Controller
             'message' => $data['message']
         ]);
         $user = User::where('id', '=', Auth::id())->first()->toArray();
-//        $image = DB::table('user_profiles')->where('user_id', '=', Auth::id())->first();
-//        $user['image'] = $image->image;
+        $image = DB::table('user_profiles')->where('user_id', '=', Auth::id())->first();
+        $user['image'] = $image->image;
 
         broadcast(new MessageSent($user, $createdMessage))->toOthers();
     }

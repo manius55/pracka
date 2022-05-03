@@ -13,7 +13,7 @@
                             <messages :messages="messages" :id="{{ \Illuminate\Support\Facades\Auth::id() }}"></messages>
                         </div>
                         <div class="card-footer">
-                            <new-message v-on:messagesent="newMessage" :user="{{ Auth::user() }}"></new-message>
+                            <new-message v-on:messagesent="newMessage" :user="{{ json_encode($user) }}"></new-message>
                         </div>
                     </div>
                 </div>

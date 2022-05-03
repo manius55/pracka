@@ -71,9 +71,10 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
         $user->update(['user_profile_id' => $user->id]);
-        dd($user);
+
         $profile = UserProfile::create([
-            'user_id' => $user['id']
+            'user_id' => $user['id'],
+            'image' => 'default.png'
         ]);
 
         return $user;

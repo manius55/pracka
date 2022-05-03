@@ -43,7 +43,7 @@ class ProfileController extends Controller
             $uId = uniqid();
             $request->file('image')->move(public_path('storage/img'), $uId . '.' . $ext);
 
-            if(File::exists(public_path('storage/img' . $profile->image)))
+            if(File::exists(public_path('storage/img' . $profile->image)) && $profile->image !== 'default.png')
                 File::delete(public_path('storage/img' . $profile->image));
 
             $profile->image = $uId . '.' . $ext;
