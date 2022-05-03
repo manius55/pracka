@@ -45,6 +45,7 @@ const app = new Vue({
             .listen('MessageSent', (e) => {
                 this.messages.push({
                     message: e.channelMessage.message,
+                    channel_id: e.channelMessage.channel_id,
                     user: e.user
                 });
             });
@@ -55,9 +56,9 @@ const app = new Vue({
                 this.messages = response.data;
             });
         },
-        newMessage(message) {
+        newMessage(message, channel_id) {
             this.messages.push(message);
-            axios.post('/messages', message)
+            axios.post('/messages', message, channel_id)
         }
     }
 });

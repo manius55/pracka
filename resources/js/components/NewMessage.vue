@@ -6,12 +6,15 @@
 </template>
 
 <script>
-import newMessage from "./NewMessage";
 
 export default {
     name: "NewMessage",
     props: {
-      user: Object,
+        user: Object,
+        channel_id: {
+            type: Number,
+            default: 0
+        }
     },
     data() {
         return {
@@ -22,7 +25,8 @@ export default {
         addMessage() {
             this.$emit('messagesent', {
                 user: this.user,
-                message: this.newMessage
+                message: this.newMessage,
+                channel_id: this.channel_id
             });
             this.newMessage = "";
         }

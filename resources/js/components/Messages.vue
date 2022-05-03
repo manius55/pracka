@@ -3,25 +3,27 @@
         <div>
             <ul>
                 <li v-for="message in messages" :key="message.id">
-                    <div v-if="ifMessageFromUser(message.user.id)">
-                        <div class="text-end">
-                            <div>
-                                <small>{{ formatDate(message.created_at) }}</small>
-                                <img :src="'/storage/img/' + message.user.image" alt="avatar" style="height: 20px" class="rounded-circle"/>
-                            </div>
-                            <div class="chat-text">
-                                <strong>{{ message.message }}</strong>
+                    <div v-if="isChannelMessage(message.channel_id)">
+                        <div v-if="ifMessageFromUser(message.user.id)">
+                            <div class="text-end">
+                                <div>
+                                    <small>{{ formatDate(message.created_at) }}</small>
+                                    <img :src="'/storage/img/' + message.user.image" alt="avatar" style="height: 20px" class="rounded-circle"/>
+                                </div>
+                                <div class="chat-text">
+                                    <strong>{{ message.message }}</strong>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div v-else>
-                        <div class="text-start content-start">
-                            <div>
-                                <img :src="'/storage/img/' + message.user.image" alt="avatar" style="height: 20px" class="rounded-circle"/>
-                                <small>{{ formatDate(message.created_at) }}</small>
-                            </div>
-                            <div class="chat-text">
-                                <strong>{{ message.message }}</strong>
+                        <div v-else>
+                            <div class="text-start content-start">
+                                <div>
+                                    <img :src="'/storage/img/' + message.user.image" alt="avatar" style="height: 20px" class="rounded-circle"/>
+                                    <small>{{ formatDate(message.created_at) }}</small>
+                                </div>
+                                <div class="chat-text">
+                                    <strong>{{ message.message }}</strong>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -40,6 +42,10 @@ export default {
             default: []
         },
         id: {
+            type: Number,
+            default: 0
+        },
+        channel: {
             type: Number,
             default: 0
         }
@@ -63,7 +69,6 @@ export default {
                 Time = DateTime[1].replace(/\s/g, '');
                 Time = Time.split(':')
                 Date = Date.replaceAll(/\./g, '-')
-                console.log(Date)
             }
             else {
                 DateTime = date.split('T')
@@ -72,11 +77,16 @@ export default {
                 Date = Date.split('-')
                 Date = Date.reverse()
                 Date = Date.join('-')
-                console.log(Date)
                 Time = DateTime[1].split(':')
             }
 
             return Time[0] + ':' + Time[1] + ' ' + Date
+        },
+        isChannelMessage(id) {
+            if (this.channel === id) {
+                return true
+            }
+            return false
         }
     }
 }

@@ -30,13 +30,29 @@ class ChannelController extends Controller
             'user' => $user
         ]);
     }
+
+    public function getChannel(int $id)
+    {
+        $userChannels = DB::table('user_channels')->where('user_id', '=', Auth::id())->pluck('channel_id')->toArray();
+        $channels = DB::table('channels')->whereIn('id', $userChannels)->get();
+
+        $user = User::where('id', '=', Auth::id())->first()->toArray();
+        $image = DB::table('user_profiles')->where('user_id', '=', Auth::id())->first();
+        $user['image'] = $image->image;
+
+        return view('channels.channel',[
+            'channels' => $channels,
+            'user' => $user,
+            'id' => $id
+        ]);
+    }
     public function newMessage(Request $request)
     {
         $data = $request->request->all();
 
         $createdMessage = ChannelMessages::create([
             'from_user_id' => Auth::id(),
-            'channel_id' => 1,
+            'channel_id' => $data['channel_id'],
             'message' => $data['message']
         ]);
         $user = User::where('id', '=', Auth::id())->first()->toArray();

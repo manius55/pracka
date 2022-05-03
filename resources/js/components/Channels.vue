@@ -4,13 +4,22 @@
             <h4>Kanały</h4>
             <ul>
                 <li v-for="channel in channels" class="channel" @click="pushToNewLocation(channel.id)">
-
-                    <img
-                        :src="'/storage/img/' + channel.image"
-                        alt="image" style="height: 20px"
-                        class="rounded-circle"
-                    >
-                    <span class="h5">{{ channel.channel_name }}</span>
+                    <div v-if="choosenChannel(channel.id)" style="background: #efefef">
+                        <img
+                            :src="'/storage/img/' + channel.image"
+                            alt="image" style="height: 20px"
+                            class="rounded-circle"
+                        >
+                        <span class="h5">{{ channel.channel_name }}</span>
+                    </div>
+                    <div v-else>
+                        <img
+                            :src="'/storage/img/' + channel.image"
+                            alt="image" style="height: 20px"
+                            class="rounded-circle"
+                        >
+                        <span class="h5">{{ channel.channel_name }}</span>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -24,13 +33,23 @@ export default {
         channels: {
             type: Array,
             default: []
+        },
+        id: {
+            type: Number,
+            default: 0
         }
     },
     methods: {
         pushToNewLocation(id) {
-            location.href = '/abc/' + id
+            location.href = '/channel/' + id
+        },
+        choosenChannel(id) {
+            if (id === this.id) {
+                return true
+            }
+            return false
         }
-    }
+    },
 }
 </script>
 

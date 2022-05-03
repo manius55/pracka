@@ -5407,17 +5407,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Channels",
   props: {
     channels: {
       type: Array,
       "default": []
+    },
+    id: {
+      type: Number,
+      "default": 0
     }
   },
   methods: {
     pushToNewLocation: function pushToNewLocation(id) {
-      location.href = '/abc/' + id;
+      location.href = '/channel/' + id;
+    },
+    choosenChannel: function choosenChannel(id) {
+      if (id === this.id) {
+        return true;
+      }
+
+      return false;
     }
   }
 });
@@ -5620,6 +5640,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Messages",
   props: {
@@ -5628,6 +5650,10 @@ __webpack_require__.r(__webpack_exports__);
       "default": []
     },
     id: {
+      type: Number,
+      "default": 0
+    },
+    channel: {
       type: Number,
       "default": 0
     }
@@ -5652,18 +5678,23 @@ __webpack_require__.r(__webpack_exports__);
         Time = DateTime[1].replace(/\s/g, '');
         Time = Time.split(':');
         Date = Date.replaceAll(/\./g, '-');
-        console.log(Date);
       } else {
         DateTime = date.split('T');
         Date = DateTime[0];
         Date = Date.split('-');
         Date = Date.reverse();
         Date = Date.join('-');
-        console.log(Date);
         Time = DateTime[1].split(':');
       }
 
       return Time[0] + ':' + Time[1] + ' ' + Date;
+    },
+    isChannelMessage: function isChannelMessage(id) {
+      if (this.channel === id) {
+        return true;
+      }
+
+      return false;
     }
   }
 });
@@ -5782,7 +5813,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _NewMessage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NewMessage */ "./resources/js/components/NewMessage.vue");
 //
 //
 //
@@ -5790,11 +5820,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "NewMessage",
   props: {
-    user: Object
+    user: Object,
+    channel_id: {
+      type: Number,
+      "default": 0
+    }
   },
   data: function data() {
     return {
@@ -5805,7 +5838,8 @@ __webpack_require__.r(__webpack_exports__);
     addMessage: function addMessage() {
       this.$emit('messagesent', {
         user: this.user,
-        message: this.newMessage
+        message: this.newMessage,
+        channel_id: this.channel_id
       });
       this.newMessage = "";
     }
@@ -5865,6 +5899,7 @@ var app = new Vue({
     window.Echo["private"]('channel').listen('MessageSent', function (e) {
       _this.messages.push({
         message: e.channelMessage.message,
+        channel_id: e.channelMessage.channel_id,
         user: e.user
       });
     });
@@ -5877,9 +5912,9 @@ var app = new Vue({
         _this2.messages = response.data;
       });
     },
-    newMessage: function newMessage(message) {
+    newMessage: function newMessage(message, channel_id) {
       this.messages.push(message);
-      axios.post('/messages', message);
+      axios.post('/messages', message, channel_id);
     }
   }
 });
@@ -35892,15 +35927,35 @@ var render = function () {
               },
             },
             [
-              _c("img", {
-                staticClass: "rounded-circle",
-                staticStyle: { height: "20px" },
-                attrs: { src: "/storage/img/" + channel.image, alt: "image" },
-              }),
-              _vm._v(" "),
-              _c("span", { staticClass: "h5" }, [
-                _vm._v(_vm._s(channel.channel_name)),
-              ]),
+              _vm.choosenChannel(channel.id)
+                ? _c("div", { staticStyle: { background: "#efefef" } }, [
+                    _c("img", {
+                      staticClass: "rounded-circle",
+                      staticStyle: { height: "20px" },
+                      attrs: {
+                        src: "/storage/img/" + channel.image,
+                        alt: "image",
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "h5" }, [
+                      _vm._v(_vm._s(channel.channel_name)),
+                    ]),
+                  ])
+                : _c("div", [
+                    _c("img", {
+                      staticClass: "rounded-circle",
+                      staticStyle: { height: "20px" },
+                      attrs: {
+                        src: "/storage/img/" + channel.image,
+                        alt: "image",
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "h5" }, [
+                      _vm._v(_vm._s(channel.channel_name)),
+                    ]),
+                  ]),
             ]
           )
         }),
@@ -36145,51 +36200,59 @@ var render = function () {
         "ul",
         _vm._l(_vm.messages, function (message) {
           return _c("li", { key: message.id }, [
-            _vm.ifMessageFromUser(message.user.id)
+            _vm.isChannelMessage(message.channel_id)
               ? _c("div", [
-                  _c("div", { staticClass: "text-end" }, [
-                    _c("div", [
-                      _c("small", [
-                        _vm._v(_vm._s(_vm.formatDate(message.created_at))),
+                  _vm.ifMessageFromUser(message.user.id)
+                    ? _c("div", [
+                        _c("div", { staticClass: "text-end" }, [
+                          _c("div", [
+                            _c("small", [
+                              _vm._v(
+                                _vm._s(_vm.formatDate(message.created_at))
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _c("img", {
+                              staticClass: "rounded-circle",
+                              staticStyle: { height: "20px" },
+                              attrs: {
+                                src: "/storage/img/" + message.user.image,
+                                alt: "avatar",
+                              },
+                            }),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "chat-text" }, [
+                            _c("strong", [_vm._v(_vm._s(message.message))]),
+                          ]),
+                        ]),
+                      ])
+                    : _c("div", [
+                        _c("div", { staticClass: "text-start content-start" }, [
+                          _c("div", [
+                            _c("img", {
+                              staticClass: "rounded-circle",
+                              staticStyle: { height: "20px" },
+                              attrs: {
+                                src: "/storage/img/" + message.user.image,
+                                alt: "avatar",
+                              },
+                            }),
+                            _vm._v(" "),
+                            _c("small", [
+                              _vm._v(
+                                _vm._s(_vm.formatDate(message.created_at))
+                              ),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "chat-text" }, [
+                            _c("strong", [_vm._v(_vm._s(message.message))]),
+                          ]),
+                        ]),
                       ]),
-                      _vm._v(" "),
-                      _c("img", {
-                        staticClass: "rounded-circle",
-                        staticStyle: { height: "20px" },
-                        attrs: {
-                          src: "/storage/img/" + message.user.image,
-                          alt: "avatar",
-                        },
-                      }),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "chat-text" }, [
-                      _c("strong", [_vm._v(_vm._s(message.message))]),
-                    ]),
-                  ]),
                 ])
-              : _c("div", [
-                  _c("div", { staticClass: "text-start content-start" }, [
-                    _c("div", [
-                      _c("img", {
-                        staticClass: "rounded-circle",
-                        staticStyle: { height: "20px" },
-                        attrs: {
-                          src: "/storage/img/" + message.user.image,
-                          alt: "avatar",
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c("small", [
-                        _vm._v(_vm._s(_vm.formatDate(message.created_at))),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "chat-text" }, [
-                      _c("strong", [_vm._v(_vm._s(message.message))]),
-                    ]),
-                  ]),
-                ]),
+              : _vm._e(),
           ])
         }),
         0
