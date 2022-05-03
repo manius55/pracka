@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Friends;
+use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
@@ -12,9 +15,32 @@ class ProfileController extends Controller
     function get(int $id)
     {
         $profile = DB::table('user_profiles')->where('user_id', '=', $id)->first();
+        $user = DB::table('users')->where('id', '=', $id)->first();
 
+        $friends = Friends::where('user_id', '=', Auth::id())->get();
+        $friendsIds = [];
+        foreach ($friends as $friend)
+        {
+            array_push($friendsIds, ($friend->attributesToArray()['friend_id']));
+        }
+
+        $friendsUsers = DB::table('users')->whereIn('id', $friendsIds)->get();
+
+        $invitations = DB::table('invitations')->where([
+            ['to_user', '=', Auth::id()],
+            ['accepted', '=', false]
+        ])->pluck('from_user')->toArray();
+
+        $invited = DB::table('invitations')->where([
+            ['from_user', '=', Auth::id()],
+            ['accepted', '=', false]
+        ])->pluck('to_user')->toArray();
         return view('profile.profile', [
-            'profile' => $profile
+            'profile' => $profile,
+            'user' => $user,
+            'friends' => $friendsUsers,
+            'invitations' => $invitations,
+            'invited' => $invited
         ]);
     }
 

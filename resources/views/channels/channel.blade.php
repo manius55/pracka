@@ -3,6 +3,7 @@
 @section('content')
         <div class="container">
             <div class="row">
+                @if($channels !== [])
                 <div class="col-3">
                     <channels :channels="{{ json_encode($channels) }}" :id="{{ json_encode($id ?? $channels[0]->id) }}"></channels>
                 </div>
@@ -17,6 +18,9 @@
                         </div>
                     </div>
                 </div>
+                @else
+                    <div class="h1">Brak kanałów</div>
+                @endif
             </div>
         </div>
 @endsection

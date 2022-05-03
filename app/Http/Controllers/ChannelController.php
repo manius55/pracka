@@ -19,7 +19,7 @@ class ChannelController extends Controller
     public function index()
     {
         $userChannels = DB::table('user_channels')->where('user_id', '=', Auth::id())->pluck('channel_id')->toArray();
-        $channels = DB::table('channels')->whereIn('id', $userChannels)->get();
+        $channels = DB::table('channels')->whereIn('id', $userChannels)->get()->toArray();
 
         $user = User::where('id', '=', Auth::id())->first()->toArray();
         $image = DB::table('user_profiles')->where('user_id', '=', Auth::id())->first();

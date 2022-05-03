@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="channels-container border">
-            <h4>Kanały</h4>
+            <h4 style="padding: 10px">Kanały</h4>
             <ul>
                 <li v-for="channel in channels" class="channel" @click="pushToNewLocation(channel.id)">
                     <div v-if="choosenChannel(channel.id)" style="background: #efefef">

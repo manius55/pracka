@@ -1,14 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container border">
+    <div class="container">
         <div class="col-md gy-5">
             <div class="row justify-content-end">
+                @if($profile->user_id === \Illuminate\Support\Facades\Auth::id())
                 <div class="col-2">
                     <a class="btn btn-primary" href= {{ url('/profile/' . $profile->user_id . '/edit/form') }}>Edytuj profil</a>
                 </div>
+                @else
+                    <add-specificfriend
+                        :friends="{{ json_encode($friends) }}"
+                        :invitations=" {{ json_encode($invitations) }}"
+                        :invited="{{ json_encode($invited) }}"
+                        :name="{{ json_encode($user->name) }}"
+                        :id="{{ json_encode($user->id) }}"
+                    ></add-specificfriend>
+                @endif
             </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center text-center">
                 <div class="col-6">
                     @if($profile->image !== null)
                     <img
@@ -26,6 +36,7 @@
                         >
                     @endif
                 </div>
+                <div><strong>{{ $user->name }}</strong></div>
             </div>
             @if($profile->description !== null)
             <div class="row justify-content-center py-2">
