@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import newMessage from "./NewMessage";
+
 export default {
     name: "NewMessage",
     props: {

@@ -52,10 +52,29 @@ export default {
                 return false
         },
         formatDate(date) {
-            let DateTime = date.split('T')
+            let Time
+            let Date
+            let DateTime
+            if (date === undefined) {
+                date = new window.Date().toLocaleString();
 
-            let Date = DateTime[0]
-            let Time = DateTime[1].split(':')
+                DateTime = date.split(',')
+                Date = DateTime[0]
+                Time = DateTime[1].replace(/\s/g, '');
+                Time = Time.split(':')
+                Date = Date.replaceAll(/\./g, '-')
+                console.log(Date)
+            }
+            else {
+                DateTime = date.split('T')
+
+                Date = DateTime[0]
+                Date = Date.split('-')
+                Date = Date.reverse()
+                Date = Date.join('-')
+                console.log(Date)
+                Time = DateTime[1].split(':')
+            }
 
             return Time[0] + ':' + Time[1] + ' ' + Date
         }
@@ -70,9 +89,14 @@ ul {
     padding: 0;
 }
 .chat-text {
-    padding: .4rem 1rem;
-    background: #ffffff;
+    color: #444;
+    padding: 12px 14px;
+    line-height: 8px;
+    font-size: 15px;
+    border-radius: 8px;
+    display: inline-block;
     position: relative;
+    background: #efefef;
 }
 .chat-avatar {
     margin: 0 0 5px 0;

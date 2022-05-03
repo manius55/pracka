@@ -5641,9 +5641,28 @@ __webpack_require__.r(__webpack_exports__);
       return false;
     },
     formatDate: function formatDate(date) {
-      var DateTime = date.split('T');
-      var Date = DateTime[0];
-      var Time = DateTime[1].split(':');
+      var Time;
+      var Date;
+      var DateTime;
+
+      if (date === undefined) {
+        date = new window.Date().toLocaleString();
+        DateTime = date.split(',');
+        Date = DateTime[0];
+        Time = DateTime[1].replace(/\s/g, '');
+        Time = Time.split(':');
+        Date = Date.replaceAll(/\./g, '-');
+        console.log(Date);
+      } else {
+        DateTime = date.split('T');
+        Date = DateTime[0];
+        Date = Date.split('-');
+        Date = Date.reverse();
+        Date = Date.join('-');
+        console.log(Date);
+        Time = DateTime[1].split(':');
+      }
+
       return Time[0] + ':' + Time[1] + ' ' + Date;
     }
   }
@@ -5763,6 +5782,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _NewMessage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NewMessage */ "./resources/js/components/NewMessage.vue");
 //
 //
 //
@@ -5770,6 +5790,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "NewMessage",
   props: {
@@ -10973,7 +10994,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nul[data-v-62dade92] {\n    list-style-type: none;\n    margin: 0;\n    padding: 0;\n}\n.chat-text[data-v-62dade92] {\n    padding: .4rem 1rem;\n    background: #ffffff;\n    position: relative;\n}\n.chat-avatar[data-v-62dade92] {\n    margin: 0 0 5px 0;\n    display: flex;\n    align-items: center;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nul[data-v-62dade92] {\n    list-style-type: none;\n    margin: 0;\n    padding: 0;\n}\n.chat-text[data-v-62dade92] {\n    color: #444;\n    padding: 12px 14px;\n    line-height: 8px;\n    font-size: 15px;\n    border-radius: 8px;\n    display: inline-block;\n    position: relative;\n    background: #efefef;\n}\n.chat-avatar[data-v-62dade92] {\n    margin: 0 0 5px 0;\n    display: flex;\n    align-items: center;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
