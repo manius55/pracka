@@ -7,10 +7,10 @@
                         <div class="text-end">
                             <div>
                                 <small>{{ formatDate(message.created_at) }}</small>
-                                <img :src="'/storage/img/' + message.user.image" alt="avatar" style="height: 20px" class="rounded-circle"/> <ab
-                                <p class="chat-text">
-                                    <strong>{{ message.message }}</strong>
-                                </p>
+                                <img :src="'/storage/img/' + message.user.image" alt="avatar" style="height: 20px" class="rounded-circle"/>
+                            </div>
+                            <div class="chat-text">
+                                <strong>{{ message.message }}</strong>
                             </div>
                         </div>
                     </div>
@@ -19,9 +19,9 @@
                             <div>
                                 <img :src="'/storage/img/' + message.user.image" alt="avatar" style="height: 20px" class="rounded-circle"/>
                                 <small>{{ formatDate(message.created_at) }}</small>
-                                <p class="chat-text">
-                                    <strong>{{ message.message }}</strong>
-                                </p>
+                            </div>
+                            <div class="chat-text">
+                                <strong>{{ message.message }}</strong>
                             </div>
                         </div>
                     </div>
@@ -88,19 +88,17 @@ ul {
     margin: 0;
     padding: 0;
 }
+li {
+    padding: 5px;
+}
 .chat-text {
     color: #444;
-    padding: 12px 14px;
-    line-height: 8px;
+    padding: 8px 20px;
+    line-height: 5px;
     font-size: 15px;
     border-radius: 8px;
     display: inline-block;
     position: relative;
     background: #efefef;
-}
-.chat-avatar {
-    margin: 0 0 5px 0;
-    display: flex;
-    align-items: center;
 }
 </style>

@@ -10994,7 +10994,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nul[data-v-62dade92] {\n    list-style-type: none;\n    margin: 0;\n    padding: 0;\n}\n.chat-text[data-v-62dade92] {\n    color: #444;\n    padding: 12px 14px;\n    line-height: 8px;\n    font-size: 15px;\n    border-radius: 8px;\n    display: inline-block;\n    position: relative;\n    background: #efefef;\n}\n.chat-avatar[data-v-62dade92] {\n    margin: 0 0 5px 0;\n    display: flex;\n    align-items: center;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nul[data-v-62dade92] {\n    list-style-type: none;\n    margin: 0;\n    padding: 0;\n}\nli[data-v-62dade92] {\n    padding: 5px;\n}\n.chat-text[data-v-62dade92] {\n    color: #444;\n    padding: 8px 20px;\n    line-height: 5px;\n    font-size: 15px;\n    border-radius: 8px;\n    display: inline-block;\n    position: relative;\n    background: #efefef;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36161,10 +36161,10 @@ var render = function () {
                           alt: "avatar",
                         },
                       }),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "chat-text" }, [
-                        _c("strong", [_vm._v(_vm._s(message.message))]),
-                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "chat-text" }, [
+                      _c("strong", [_vm._v(_vm._s(message.message))]),
                     ]),
                   ]),
                 ])
@@ -36183,10 +36183,10 @@ var render = function () {
                       _c("small", [
                         _vm._v(_vm._s(_vm.formatDate(message.created_at))),
                       ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "chat-text" }, [
-                        _c("strong", [_vm._v(_vm._s(message.message))]),
-                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "chat-text" }, [
+                      _c("strong", [_vm._v(_vm._s(message.message))]),
                     ]),
                   ]),
                 ]),
