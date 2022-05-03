@@ -5642,6 +5642,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Messages",
   props: {
@@ -36206,11 +36208,17 @@ var render = function () {
                     ? _c("div", [
                         _c("div", { staticClass: "text-end" }, [
                           _c("div", [
-                            _c("small", [
-                              _vm._v(
-                                _vm._s(_vm.formatDate(message.created_at))
-                              ),
-                            ]),
+                            _c(
+                              "span",
+                              { staticStyle: { "font-size": "10px" } },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.formatDate(message.created_at))
+                                ),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("strong", [_vm._v(_vm._s(message.user.name))]),
                             _vm._v(" "),
                             _c("img", {
                               staticClass: "rounded-circle",
@@ -36239,11 +36247,17 @@ var render = function () {
                               },
                             }),
                             _vm._v(" "),
-                            _c("small", [
-                              _vm._v(
-                                _vm._s(_vm.formatDate(message.created_at))
-                              ),
-                            ]),
+                            _c("strong", [_vm._v(_vm._s(message.user.name))]),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              { staticStyle: { "font-size": "10px" } },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.formatDate(message.created_at))
+                                ),
+                              ]
+                            ),
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "chat-text" }, [

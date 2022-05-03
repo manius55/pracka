@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-9">
                     <div class="card">
-                        <div class="card-header">Channel</div>
+                        <div class="card-header">Kanał tekstowy</div>
                         <div class="card-body">
                             <messages :messages="messages" :id="{{ \Illuminate\Support\Facades\Auth::id() }}" :channel="{{ json_encode($id ?? $channels[0]->id) }}"></messages>
                         </div>

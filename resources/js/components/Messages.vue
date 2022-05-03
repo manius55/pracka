@@ -7,7 +7,8 @@
                         <div v-if="ifMessageFromUser(message.user.id)">
                             <div class="text-end">
                                 <div>
-                                    <small>{{ formatDate(message.created_at) }}</small>
+                                    <span style="font-size: 10px">{{ formatDate(message.created_at) }}</span>
+                                    <strong>{{ message.user.name }}</strong>
                                     <img :src="'/storage/img/' + message.user.image" alt="avatar" style="height: 20px" class="rounded-circle"/>
                                 </div>
                                 <div class="chat-text">
@@ -19,7 +20,8 @@
                             <div class="text-start content-start">
                                 <div>
                                     <img :src="'/storage/img/' + message.user.image" alt="avatar" style="height: 20px" class="rounded-circle"/>
-                                    <small>{{ formatDate(message.created_at) }}</small>
+                                    <strong>{{ message.user.name }}</strong>
+                                    <span style="font-size: 10px">{{ formatDate(message.created_at) }}</span>
                                 </div>
                                 <div class="chat-text">
                                     <strong>{{ message.message }}</strong>
@@ -48,7 +50,7 @@ export default {
         channel: {
             type: Number,
             default: 0
-        }
+        },
     },
     methods: {
         ifMessageFromUser(id) {
