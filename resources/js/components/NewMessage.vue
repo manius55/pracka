@@ -1,7 +1,7 @@
 <template>
-    <span>
+    <span @keyup.enter="addMessage()">
         <input name="message" class="form-control" placeholder="Wpisz wiadomość" v-model="newMessage">
-        <button class="btn btn-primary" @click="addMessage()" @keyup.enter="addMessage()">Wyślij</button>
+        <button class="btn btn-primary" @click="addMessage()">Wyślij</button>
     </span>
 </template>
 

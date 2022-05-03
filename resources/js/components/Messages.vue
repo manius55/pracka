@@ -8,8 +8,10 @@
                             <div class="text-end">
                                 <div>
                                     <span style="font-size: 10px">{{ formatDate(message.created_at) }}</span>
-                                    <strong>{{ message.user.name }}</strong>
-                                    <img :src="'/storage/img/' + message.user.image" alt="avatar" style="height: 20px" class="rounded-circle"/>
+                                    <span @click="routeToUserProfile(message.user.id)">
+                                        <strong>{{ message.user.name }}</strong>
+                                        <img :src="'/storage/img/' + message.user.image" alt="avatar" style="height: 20px" class="rounded-circle"/>
+                                    </span>
                                 </div>
                                 <div class="chat-text">
                                     <strong>{{ message.message }}</strong>
@@ -19,8 +21,10 @@
                         <div v-else>
                             <div class="text-start content-start">
                                 <div>
-                                    <img :src="'/storage/img/' + message.user.image" alt="avatar" style="height: 20px" class="rounded-circle"/>
-                                    <strong>{{ message.user.name }}</strong>
+                                    <span @click="routeToUserProfile(message.user.id)">
+                                        <img :src="'/storage/img/' + message.user.image" alt="avatar" style="height: 20px" class="rounded-circle"/>
+                                        <strong>{{ message.user.name }}</strong>
+                                    </span>
                                     <span style="font-size: 10px">{{ formatDate(message.created_at) }}</span>
                                 </div>
                                 <div class="chat-text">
@@ -89,6 +93,9 @@ export default {
                 return true
             }
             return false
+        },
+        routeToUserProfile(id) {
+            location.href = '/profile/' + id
         }
     }
 }

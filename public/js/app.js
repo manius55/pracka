@@ -5760,6 +5760,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Messages",
   props: {
@@ -5813,6 +5817,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return false;
+    },
+    routeToUserProfile: function routeToUserProfile(id) {
+      location.href = '/profile/' + id;
     }
   }
 });
@@ -36520,16 +36527,32 @@ var render = function () {
                               ]
                             ),
                             _vm._v(" "),
-                            _c("strong", [_vm._v(_vm._s(message.user.name))]),
-                            _vm._v(" "),
-                            _c("img", {
-                              staticClass: "rounded-circle",
-                              staticStyle: { height: "20px" },
-                              attrs: {
-                                src: "/storage/img/" + message.user.image,
-                                alt: "avatar",
+                            _c(
+                              "span",
+                              {
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.routeToUserProfile(
+                                      message.user.id
+                                    )
+                                  },
+                                },
                               },
-                            }),
+                              [
+                                _c("strong", [
+                                  _vm._v(_vm._s(message.user.name)),
+                                ]),
+                                _vm._v(" "),
+                                _c("img", {
+                                  staticClass: "rounded-circle",
+                                  staticStyle: { height: "20px" },
+                                  attrs: {
+                                    src: "/storage/img/" + message.user.image,
+                                    alt: "avatar",
+                                  },
+                                }),
+                              ]
+                            ),
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "chat-text" }, [
@@ -36540,16 +36563,32 @@ var render = function () {
                     : _c("div", [
                         _c("div", { staticClass: "text-start content-start" }, [
                           _c("div", [
-                            _c("img", {
-                              staticClass: "rounded-circle",
-                              staticStyle: { height: "20px" },
-                              attrs: {
-                                src: "/storage/img/" + message.user.image,
-                                alt: "avatar",
+                            _c(
+                              "span",
+                              {
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.routeToUserProfile(
+                                      message.user.id
+                                    )
+                                  },
+                                },
                               },
-                            }),
-                            _vm._v(" "),
-                            _c("strong", [_vm._v(_vm._s(message.user.name))]),
+                              [
+                                _c("img", {
+                                  staticClass: "rounded-circle",
+                                  staticStyle: { height: "20px" },
+                                  attrs: {
+                                    src: "/storage/img/" + message.user.image,
+                                    alt: "avatar",
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _c("strong", [
+                                  _vm._v(_vm._s(message.user.name)),
+                                ]),
+                              ]
+                            ),
                             _vm._v(" "),
                             _c(
                               "span",
@@ -36758,51 +36797,58 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("span", [
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.newMessage,
-          expression: "newMessage",
-        },
-      ],
-      staticClass: "form-control",
-      attrs: { name: "message", placeholder: "Wpisz wiadomość" },
-      domProps: { value: _vm.newMessage },
+  return _c(
+    "span",
+    {
       on: {
-        input: function ($event) {
-          if ($event.target.composing) {
-            return
+        keyup: function ($event) {
+          if (
+            !$event.type.indexOf("key") &&
+            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+          ) {
+            return null
           }
-          _vm.newMessage = $event.target.value
+          return _vm.addMessage()
         },
       },
-    }),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-primary",
+    },
+    [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.newMessage,
+            expression: "newMessage",
+          },
+        ],
+        staticClass: "form-control",
+        attrs: { name: "message", placeholder: "Wpisz wiadomość" },
+        domProps: { value: _vm.newMessage },
         on: {
-          click: function ($event) {
-            return _vm.addMessage()
-          },
-          keyup: function ($event) {
-            if (
-              !$event.type.indexOf("key") &&
-              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-            ) {
-              return null
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
             }
-            return _vm.addMessage()
+            _vm.newMessage = $event.target.value
           },
         },
-      },
-      [_vm._v("Wyślij")]
-    ),
-  ])
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          on: {
+            click: function ($event) {
+              return _vm.addMessage()
+            },
+          },
+        },
+        [_vm._v("Wyślij")]
+      ),
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
