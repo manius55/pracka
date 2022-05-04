@@ -17,7 +17,7 @@ class UserFriendsController extends Controller
             array_push($friendsIds, ($friend->attributesToArray()['friend_id']));
         }
 
-        $friendsUsers = DB::table('users')->whereIn('id', $friendsIds)->get();
+        $friendsUsers = DB::table('users')->whereIn('id', $friendsIds)->get()->toArray();
         $users = DB::table('users')->get()->toArray();
 
         $invitations = DB::table('invitations')->where([

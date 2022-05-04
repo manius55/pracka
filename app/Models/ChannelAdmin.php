@@ -9,9 +9,9 @@ class ChannelAdmin extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['owner', 'user_id', 'channel_id'];
-
     protected $primaryKey = ['channel_id', 'user_id'];
+
+    protected $fillable = ['owner', 'user_id', 'channel_id'];
 
     public $incrementing = false;
 }

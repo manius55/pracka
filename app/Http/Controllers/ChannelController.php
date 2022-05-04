@@ -6,6 +6,7 @@ use App\Models\ChannelAdmin;
 use App\Models\ChannelMessages;
 use App\Models\Channels;
 use App\Models\User;
+use App\Models\UserChannels;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -89,14 +90,49 @@ class ChannelController extends Controller
     public function createChannel(Request $request)
     {
         $data = $request->request->all();
-        $channel = Channels::create([
-            'channel_name' => $data['channel_name']
+        if ($data['channel_name'] === null && !($request->hasFile('image')))
+        {
+            return redirect('/channel');
+        }
+
+        if($request->hasFile('image'))
+        {
+            $validated = $request->validate([
+                'image' => 'required|image|mimes:jpg,png,jpeg'
+            ]);
+            $name = $request->file('image')->getClientOriginalName();
+            $nameAndExt = explode('.', $name);
+            $ext = end($nameAndExt);
+            $uId = uniqid();
+            $request->file('image')->move(public_path('storage/img'), $uId . '.' . $ext);
+
+            $channel = Channels::create([
+                'channel_name' => $data['channel_name'],
+                'image' => $uId . '.' . $ext
+            ]);
+
+            if(File::exists(public_path('storage/img' . $channel->image)) && $channel->image !== 'default.png')
+                File::delete(public_path('storage/img' . $channel->image));
+        }
+        else {
+            $channel = Channels::create([
+                'channel_name' => $data['channel_name']
+            ]);
+        }
+
+
+        $userChannel = UserChannels::create([
+           'user_id' => Auth::id(),
+           'channel_id' => $channel->id
         ]);
+
         $channelAdmin = ChannelAdmin::create([
             'user_id' => Auth::id(),
             'channel_id' => $channel->id,
             'owner' => true
         ]);
+
+        return redirect('/channel');
     }
 
     public function editChannel(Request $request, int $id)

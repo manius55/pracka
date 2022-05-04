@@ -16,9 +16,9 @@ class CreateChannelAdminsTable extends Migration
         Schema::create('channel_admins', function (Blueprint $table) {
             $table->timestamps();
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('users')->on('id');
             $table->integer('channel_id')->unsigned();
-            $table->foreign('channel_id')->references('channels')->on('id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('channel_id')->references('id')->on('channels');
             $table->primary(['channel_id', 'user_id']);
             $table->boolean('owner')->default(false);
         });

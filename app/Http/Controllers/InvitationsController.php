@@ -29,7 +29,7 @@ class InvitationsController extends Controller
             ['accepted', '=', false]
         ])->pluck('from_user')->toArray();
 
-        $invitationsUsers = DB::table('users')->whereIn('id', $invitationsId)->get();
+        $invitationsUsers = DB::table('users')->whereIn('id', $invitationsId)->get()->toArray();
 
         return view('invitations', [
             'users' => $invitationsUsers
@@ -43,7 +43,7 @@ class InvitationsController extends Controller
             ['accepted', '=', false]
         ])->pluck('to_user')->toArray();
 
-        $invitationsUsers = DB::table('users')->whereIn('id', $invitationsId)->get();
+        $invitationsUsers = DB::table('users')->whereIn('id', $invitationsId)->get()->toArray();
 
         return view('myInvitations', [
             'users' => $invitationsUsers

@@ -44,4 +44,5 @@ Route::get('/channel', [ChannelController::class, 'index']);
 Route::get('/channel/createForm', [ChannelController::class, 'createChannelForm']);
 Route::get('/channel/{id}', [ChannelController::class, 'getChannel']);
 Route::get('/messages', [ChannelController::class, 'messagesWithUser']);
+Route::post('/channel/create', [ChannelController::class, 'createChannel']);
 Route::post('/messages', [ChannelController::class, 'newMessage']);
