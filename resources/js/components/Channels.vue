@@ -4,7 +4,7 @@
             <h4 style="padding: 10px">Kanały</h4>
             <ul>
                 <li v-for="channel in channels" class="channel" @click="pushToNewLocation(channel.id)">
-                    <div v-if="choosenChannel(channel.id)" style="background: #efefef">
+                    <div v-if="choosenChannel(channel.id)" style="background: #efefef;">
                         <img
                             :src="'/storage/img/' + channel.image"
                             alt="image" style="height: 20px"

@@ -3,6 +3,9 @@
 @section('content')
         <div class="container">
             <div class="row">
+                <div class="justify-content-start">
+                    <a class="btn btn-success my-1" href="/channel/createForm">Stwórz kanał</a>
+                </div>
                 @if($channels !== [])
                 <div class="col-3">
                     <channels :channels="{{ json_encode($channels) }}" :id="{{ json_encode($id ?? $channels[0]->id) }}"></channels>

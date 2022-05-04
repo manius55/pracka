@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChannelAdmin;
 use App\Models\ChannelMessages;
+use App\Models\Channels;
 use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Events\MessageSent;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class ChannelController extends Controller
 {
@@ -29,6 +32,11 @@ class ChannelController extends Controller
             'channels' => $channels,
             'user' => $user
         ]);
+    }
+
+    public function createChannelForm()
+    {
+        return view('channels.createChannelForm');
     }
 
     public function getChannel(int $id)
@@ -76,5 +84,52 @@ class ChannelController extends Controller
         }
 
         return $messageWithUserAndImage;
+    }
+
+    public function createChannel(Request $request)
+    {
+        $data = $request->request->all();
+        $channel = Channels::create([
+            'channel_name' => $data['channel_name']
+        ]);
+        $channelAdmin = ChannelAdmin::create([
+            'user_id' => Auth::id(),
+            'channel_id' => $channel->id,
+            'owner' => true
+        ]);
+    }
+
+    public function editChannel(Request $request, int $id)
+    {
+        $data = $request->request->all();
+
+        $channel = DB::table('channels')->find($id);
+
+        if($request->hasFile('image'))
+        {
+            $validated = $request->validate([
+                'image' => 'required|image|mimes:jpg,png,jpeg'
+            ]);
+            $name = $request->file('image')->getClientOriginalName();
+            $nameAndExt = explode('.', $name);
+            $ext = end($nameAndExt);
+            $uId = uniqid();
+            $request->file('image')->move(public_path('storage/img'), $uId . '.' . $ext);
+
+            if(File::exists(public_path('storage/img' . $channel->image)) && $channel->image !== 'default.png')
+                File::delete(public_path('storage/img' . $channel->image));
+
+            $channel->image = $uId . '.' . $ext;
+        }
+
+        $channel->channel_name = $data['channel_name'];
+        $channel->save();
+    }
+
+    public function deleteChannel(int $id)
+    {
+        $channel = DB::table('channels')->find($id);
+
+        $channel->delete();
     }
 }

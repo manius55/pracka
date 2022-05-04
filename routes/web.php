@@ -41,6 +41,7 @@ Route::delete('/invitations/{id}', [InvitationsController::class, 'delete']);
 Route::delete('/myInvitations/{id}', [InvitationsController::class, 'deleteMyInvitation']);
 
 Route::get('/channel', [ChannelController::class, 'index']);
+Route::get('/channel/createForm', [ChannelController::class, 'createChannelForm']);
 Route::get('/channel/{id}', [ChannelController::class, 'getChannel']);
 Route::get('/messages', [ChannelController::class, 'messagesWithUser']);
 Route::post('/messages', [ChannelController::class, 'newMessage']);

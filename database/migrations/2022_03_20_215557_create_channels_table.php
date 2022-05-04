@@ -17,7 +17,7 @@ class CreateChannelsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('channel_name');
-            $table->string('image')->nullable()->default(null);
+            $table->string('image')->nullable()->default('default.png');
         });
     }
 
