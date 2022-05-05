@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+const newMessage = require("./components/NewMessage");
 
 window.Vue = require('vue').default;
 
@@ -58,12 +59,7 @@ const app = new Vue({
             });
         },
         newMessage(message, channel_id) {
-            let newMessages = []
-            newMessages[0] = message
-            for (let x=0; x<this.messages.length; x++) {
-                newMessages[x+1] = this.messages[x]
-            }
-            this.messages = newMessages
+            this.messages.append(message)
             axios.post('/messages', message, channel_id)
         }
     }

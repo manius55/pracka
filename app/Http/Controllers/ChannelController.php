@@ -27,10 +27,12 @@ class ChannelController extends Controller
         $user = User::where('id', '=', Auth::id())->first()->toArray();
         $image = DB::table('user_profiles')->where('user_id', '=', Auth::id())->first();
         $user['image'] = $image->image;
+        $admin = ChannelAdmin::where('user_id', '=', Auth::id())->pluck('channel_id')->toArray();
 
         return view('channels.channel',[
             'channels' => $channels,
-            'user' => $user
+            'user' => $user,
+            'admin' => $admin
         ]);
     }
 
@@ -47,11 +49,13 @@ class ChannelController extends Controller
         $user = User::where('id', '=', Auth::id())->first()->toArray();
         $image = DB::table('user_profiles')->where('user_id', '=', Auth::id())->first();
         $user['image'] = $image->image;
+        $admin = ChannelAdmin::where('user_id', '=', Auth::id())->pluck('channel_id')->toArray();
 
         return view('channels.channel',[
             'channels' => $channels,
             'user' => $user,
-            'id' => $id
+            'id' => $id,
+            'admin' => $admin
         ]);
     }
     public function newMessage(Request $request)

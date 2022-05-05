@@ -4,7 +4,10 @@
         <div class="container">
             <div class="row">
                 <div class="justify-content-start">
-                    <a class="btn btn-success my-1" href="/channel/createForm">Stwórz kanał</a>
+                        <a class="btn btn-success my-1" href="/channel/createForm">Stwórz kanał</a>
+                    @if($channels!==[] && isset($admin) && ((isset($id) && in_array($id, $admin)) || in_array($channels[0]->id, $admin)))
+                        <button class="btn-primary btn"> Zarządzaj kanałem</button>
+                    @endif
                 </div>
                 @if($channels !== [])
                 <div class="col-3">
