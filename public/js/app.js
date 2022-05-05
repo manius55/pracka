@@ -5801,11 +5801,9 @@ __webpack_require__.r(__webpack_exports__);
         Time = Time.split(':');
         Date = Date.replaceAll(/\./g, '-');
       } else {
-        DateTime = date.split('T');
+        DateTime = date.split(" ");
+        console.log(DateTime);
         Date = DateTime[0];
-        Date = Date.split('-');
-        Date = Date.reverse();
-        Date = Date.join('-');
         Time = DateTime[1].split(':');
       }
 
@@ -6046,14 +6044,14 @@ var app = new Vue({
       });
     },
     newMessage: function newMessage(message, channel_id) {
-      var array = [];
-      array[0] = message;
+      var newMessages = [];
+      newMessages[0] = message;
 
       for (var x = 0; x < this.messages.length; x++) {
-        array[x + 1] = this.messages[x];
+        newMessages[x + 1] = this.messages[x];
       }
 
-      this.messages = array;
+      this.messages = newMessages;
       axios.post('/messages', message, channel_id);
     }
   }

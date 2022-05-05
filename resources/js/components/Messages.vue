@@ -77,12 +77,10 @@ export default {
                 Date = Date.replaceAll(/\./g, '-')
             }
             else {
-                DateTime = date.split('T')
-
+                DateTime = date.split(" ")
+                console.log(DateTime)
                 Date = DateTime[0]
-                Date = Date.split('-')
-                Date = Date.reverse()
-                Date = Date.join('-')
+                
                 Time = DateTime[1].split(':')
             }
 
