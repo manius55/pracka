@@ -78,9 +78,7 @@ export default {
             }
             else {
                 DateTime = date.split(" ")
-                console.log(DateTime)
                 Date = DateTime[0]
-                
                 Time = DateTime[1].split(':')
             }
 
