@@ -5821,6 +5821,11 @@ __webpack_require__.r(__webpack_exports__);
     routeToUserProfile: function routeToUserProfile(id) {
       location.href = '/profile/' + id;
     }
+  },
+  data: function data() {
+    return {
+      reverse_messages: []
+    };
   }
 });
 
@@ -5961,12 +5966,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addMessage: function addMessage() {
-      this.$emit('messagesent', {
-        user: this.user,
-        message: this.newMessage,
-        channel_id: this.channel_id
-      });
-      this.newMessage = "";
+      if (this.newMessage !== "") {
+        this.$emit('messagesent', {
+          user: this.user,
+          message: this.newMessage,
+          channel_id: this.channel_id
+        });
+        this.newMessage = "";
+      }
     }
   }
 });
@@ -6039,7 +6046,14 @@ var app = new Vue({
       });
     },
     newMessage: function newMessage(message, channel_id) {
-      this.messages.push(message);
+      var array = [];
+      array[0] = message;
+
+      for (var x = 0; x < this.messages.length; x++) {
+        array[x + 1] = this.messages[x];
+      }
+
+      this.messages = array;
       axios.post('/messages', message, channel_id);
     }
   }
@@ -36509,6 +36523,14 @@ var render = function () {
     _c("div", [
       _c(
         "ul",
+        {
+          staticClass: "overflow-auto",
+          staticStyle: {
+            height: "600px",
+            "flex-direction": "column-reverse",
+            display: "flex",
+          },
+        },
         _vm._l(_vm.messages, function (message) {
           return _c("li", { key: message.id }, [
             _vm.isChannelMessage(message.channel_id)

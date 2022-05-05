@@ -58,7 +58,12 @@ const app = new Vue({
             });
         },
         newMessage(message, channel_id) {
-            this.messages.push(message);
+            let array = []
+            array[0] = message
+            for (let x=0; x<this.messages.length;x++) {
+                array[x+1] = this.messages[x]
+            }
+            this.messages = array
             axios.post('/messages', message, channel_id)
         }
     }

@@ -23,12 +23,14 @@ export default {
     },
     methods: {
         addMessage() {
-            this.$emit('messagesent', {
-                user: this.user,
-                message: this.newMessage,
-                channel_id: this.channel_id
-            });
-            this.newMessage = "";
+            if (this.newMessage !== "") {
+                this.$emit('messagesent', {
+                    user: this.user,
+                    message: this.newMessage,
+                    channel_id: this.channel_id
+                });
+                this.newMessage = "";
+            }
         }
     }
 }

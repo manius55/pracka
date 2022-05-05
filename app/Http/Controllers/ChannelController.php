@@ -7,7 +7,6 @@ use App\Models\ChannelMessages;
 use App\Models\Channels;
 use App\Models\User;
 use App\Models\UserChannels;
-use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Events\MessageSent;
@@ -73,7 +72,7 @@ class ChannelController extends Controller
 
     public function messagesWithUser()
     {
-        $messageWithUser = ChannelMessages::with('user')->get()->toArray();
+        $messageWithUser = ChannelMessages::with('user')->orderBy('created_at', 'desc')->get()->toArray();
         $messageWithUserAndImage = [];
         foreach ($messageWithUser as $object) {
             $user = $object['user'];

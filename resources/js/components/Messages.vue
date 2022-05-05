@@ -1,7 +1,7 @@
 <template xmlns="http://www.w3.org/1999/html">
     <div>
         <div>
-            <ul>
+            <ul class="overflow-auto" style="height: 600px; flex-direction: column-reverse; display: flex;">
                 <li v-for="message in messages" :key="message.id">
                     <div v-if="isChannelMessage(message.channel_id)">
                         <div v-if="ifMessageFromUser(message.user.id)">
@@ -96,6 +96,11 @@ export default {
         },
         routeToUserProfile(id) {
             location.href = '/profile/' + id
+        },
+    },
+    data() {
+        return {
+            reverse_messages: []
         }
     }
 }
