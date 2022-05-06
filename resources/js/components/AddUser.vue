@@ -8,12 +8,20 @@
         </div>
         <modal :show="this.show" :key="this.show" @close="showModal()">
             <template #header>
-                Dodawanie użytkownika do kanału
+                Dodawanie użytkownika do kanału (wybierz jedną z dwóch opcji dodawania)
             </template>
             <template #body>
                 <div class="form-group text-start">
-                    <label for="user">Nick dodawanego użytkownika:</label>
-                    <input type="text" class="rounded form-control" id="user" name="user" placeholder="wprowadź nick" :value="name">
+                    <div class="my-4">
+                        <label for="user">Dodaj po nicku użytkownika:</label>
+                        <input type="text" class="rounded form-control" id="user" name="user" placeholder="wprowadź nick" v-model="name">
+                    </div>
+                    <div>
+                        <label for="friend">Dodaj z listy znajomych:</label>
+                        <select class="form-select" name="friend" id="friend" v-model="selectedValue">
+                            <option v-for="friend in friends">{{ friend.name }}</option>
+                        </select>
+                    </div>
                 </div>
             </template>
             <template #footer>
@@ -58,11 +66,18 @@ export default {
         id: {
             type: Number,
             default: 0
+        },
+        friends: {
+            type: Array,
+            default() {
+                return []
+            }
         }
     },
     data() {
         return {
-            name: ''
+            name: '',
+            selectedValue: '',
         }
     },
     methods: {
@@ -70,25 +85,36 @@ export default {
             this.show = !this.show
         },
         addUser() {
-            this.name = document.getElementById('user').value
-            let user = this.users.find(x => x.name === this.name)
-
-            if (user) {
-                let UserAlreadyAtChannel = this.channel_users.find(x => x.user_id === user.id && x.channel_id === this.id)
-                if (UserAlreadyAtChannel) {
-                    this.alert('Użytkownik już jest na kanale!', 'danger')
-                }
-                else {
-                    this.alert('Użytkownik dodany do kanału!', 'success')
-                    axios.post(`/channel/addUser/${this.id}/${user.id}`)
-                    this.channel_users.push({'channel_id': this.id, 'user_id': user.id})
-                }
+            if (this.name !== '' && this.selectedValue !== '') {
+                this.alert('Proszę wybrać znajomego lub wpisać nick użytkownika!', 'danger')
             }
             else {
-                this.alert('Nie znaleziono użytkownika!', 'danger')
+                let choosen_name = ''
+                if (this.name === '') {
+                    choosen_name = this.selectedValue
+                }
+                else {
+                    choosen_name = this.name
+                }
+                let user = this.users.find(x => x.name === choosen_name)
+                if (user) {
+                    let UserAlreadyAtChannel = this.channel_users.find(x => x.user_id === user.id && x.channel_id === this.id)
+                    if (UserAlreadyAtChannel) {
+                        this.alert('Użytkownik już jest na kanale!', 'danger')
+                    }
+                    else {
+                        this.alert('Użytkownik dodany do kanału!', 'success')
+                        axios.post(`/channel/addUser/${this.id}/${user.id}`)
+                        this.channel_users.push({'channel_id': this.id, 'user_id': user.id})
+                    }
+                }
+                else {
+                    this.alert('Nie znaleziono użytkownika!', 'danger')
+                }
             }
-            this.showModal()
             this.name = ''
+            this.selectedValue = ''
+            this.showModal()
         },
         alert(message, type) {
             let alertPlaceholder = document.getElementById('AlertPlaceholder')

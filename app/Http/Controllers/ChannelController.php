@@ -63,11 +63,13 @@ class ChannelController extends Controller
     {
         $users = User::all()->toArray();
         $channelsUsers = DB::table('user_channels')->where('channel_id', '=', $id)->get()->toArray();
-
+        $friendsIds = DB::table('friends')->where('user_id', '=', Auth::id())->pluck('friend_id')->toArray();
+        $friends = DB::table('users')->whereIn('id', $friendsIds)->get()->toArray();
         return view('channels.channelUsersList', [
             'users' => $users,
             'channels_users' => $channelsUsers,
-            'id' => $id
+            'id' => $id,
+            'friends' => $friends
         ]);
     }
     public function newMessage(Request $request)

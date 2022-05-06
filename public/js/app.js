@@ -5541,6 +5541,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AddUser",
   props: {
@@ -5563,11 +5571,18 @@ __webpack_require__.r(__webpack_exports__);
     id: {
       type: Number,
       "default": 0
+    },
+    friends: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
     }
   },
   data: function data() {
     return {
-      name: ''
+      name: '',
+      selectedValue: ''
     };
   },
   methods: {
@@ -5577,32 +5592,44 @@ __webpack_require__.r(__webpack_exports__);
     addUser: function addUser() {
       var _this = this;
 
-      this.name = document.getElementById('user').value;
-      var user = this.users.find(function (x) {
-        return x.name === _this.name;
-      });
+      if (this.name !== '' && this.selectedValue !== '') {
+        this.alert('Proszę wybrać znajomego lub wpisać nick użytkownika!', 'danger');
+      } else {
+        var choosen_name = '';
 
-      if (user) {
-        var UserAlreadyAtChannel = this.channel_users.find(function (x) {
-          return x.user_id === user.id && x.channel_id === _this.id;
+        if (this.name === '') {
+          choosen_name = this.selectedValue;
+        } else {
+          choosen_name = this.name;
+        }
+
+        var user = this.users.find(function (x) {
+          return x.name === choosen_name;
         });
 
-        if (UserAlreadyAtChannel) {
-          this.alert('Użytkownik już jest na kanale!', 'danger');
-        } else {
-          this.alert('Użytkownik dodany do kanału!', 'success');
-          axios.post("/channel/addUser/".concat(this.id, "/").concat(user.id));
-          this.channel_users.push({
-            'channel_id': this.id,
-            'user_id': user.id
+        if (user) {
+          var UserAlreadyAtChannel = this.channel_users.find(function (x) {
+            return x.user_id === user.id && x.channel_id === _this.id;
           });
+
+          if (UserAlreadyAtChannel) {
+            this.alert('Użytkownik już jest na kanale!', 'danger');
+          } else {
+            this.alert('Użytkownik dodany do kanału!', 'success');
+            axios.post("/channel/addUser/".concat(this.id, "/").concat(user.id));
+            this.channel_users.push({
+              'channel_id': this.id,
+              'user_id': user.id
+            });
+          }
+        } else {
+          this.alert('Nie znaleziono użytkownika!', 'danger');
         }
-      } else {
-        this.alert('Nie znaleziono użytkownika!', 'danger');
       }
 
-      this.showModal();
       this.name = '';
+      this.selectedValue = '';
+      this.showModal();
     },
     alert: function alert(message, type) {
       var alertPlaceholder = document.getElementById('AlertPlaceholder');
@@ -36455,7 +36482,7 @@ var render = function () {
             fn: function () {
               return [
                 _vm._v(
-                  "\n            Dodawanie użytkownika do kanału\n        "
+                  "\n            Dodawanie użytkownika do kanału (wybierz jedną z dwóch opcji dodawania)\n        "
                 ),
               ]
             },
@@ -36466,20 +36493,79 @@ var render = function () {
             fn: function () {
               return [
                 _c("div", { staticClass: "form-group text-start" }, [
-                  _c("label", { attrs: { for: "user" } }, [
-                    _vm._v("Nick dodawanego użytkownika:"),
+                  _c("div", { staticClass: "my-4" }, [
+                    _c("label", { attrs: { for: "user" } }, [
+                      _vm._v("Dodaj po nicku użytkownika:"),
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.name,
+                          expression: "name",
+                        },
+                      ],
+                      staticClass: "rounded form-control",
+                      attrs: {
+                        type: "text",
+                        id: "user",
+                        name: "user",
+                        placeholder: "wprowadź nick",
+                      },
+                      domProps: { value: _vm.name },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.name = $event.target.value
+                        },
+                      },
+                    }),
                   ]),
                   _vm._v(" "),
-                  _c("input", {
-                    staticClass: "rounded form-control",
-                    attrs: {
-                      type: "text",
-                      id: "user",
-                      name: "user",
-                      placeholder: "wprowadź nick",
-                    },
-                    domProps: { value: _vm.name },
-                  }),
+                  _c("div", [
+                    _c("label", { attrs: { for: "friend" } }, [
+                      _vm._v("Dodaj z listy znajomych:"),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.selectedValue,
+                            expression: "selectedValue",
+                          },
+                        ],
+                        staticClass: "form-select",
+                        attrs: { name: "friend", id: "friend" },
+                        on: {
+                          change: function ($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function (o) {
+                                return o.selected
+                              })
+                              .map(function (o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.selectedValue = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          },
+                        },
+                      },
+                      _vm._l(_vm.friends, function (friend) {
+                        return _c("option", [_vm._v(_vm._s(friend.name))])
+                      }),
+                      0
+                    ),
+                  ]),
                 ]),
               ]
             },
