@@ -65,11 +65,17 @@ class ChannelController extends Controller
         $channelsUsers = DB::table('user_channels')->where('channel_id', '=', $id)->get()->toArray();
         $friendsIds = DB::table('friends')->where('user_id', '=', Auth::id())->pluck('friend_id')->toArray();
         $friends = DB::table('users')->whereIn('id', $friendsIds)->get()->toArray();
+        $owner = ChannelAdmin::where([
+            ['user_id', '=', Auth::id()],
+            ['owner', '=', true]
+        ])->pluck('channel_id')->toArray();
+
         return view('channels.channelUsersList', [
             'users' => $users,
             'channels_users' => $channelsUsers,
             'id' => $id,
-            'friends' => $friends
+            'friends' => $friends,
+            'owner' => $owner
         ]);
     }
     public function newMessage(Request $request)
@@ -194,8 +200,9 @@ class ChannelController extends Controller
 
     public function deleteChannel(int $id)
     {
-        $channel = DB::table('channels')->find($id);
-
-        $channel->delete();
+        $channelAdmins = DB::table('channel_admins')->where('channel_id', '=', $id)->delete();
+        $userChannels = DB::table('user_channels')->where('channel_id', '=', $id)->delete();
+        $channelMessages = DB::table('channel_messages')->where('channel_id', '=', $id)->delete();
+        $channel = DB::table('channels')->where('id', '=', $id)->delete();
     }
 }

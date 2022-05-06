@@ -31,6 +31,8 @@ Vue.component('add-user', require('./components/AddUser.vue').default);
 Vue.component('new-message', require('./components/NewMessage.vue').default);
 Vue.component('messages', require('./components/Messages.vue').default);
 Vue.component('channels', require('./components/Channels.vue').default);
+Vue.component('channel-users', require('./components/ChannelUsers.vue').default);
+Vue.component('delete-channel', require('./components/DeleteChannel.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -60,7 +62,12 @@ const app = new Vue({
             });
         },
         newMessage(message, channel_id) {
-            this.messages.append(message)
+            let newMessages = []
+            newMessages[0] = message
+            for (let x=0; x<this.messages.length; x++) {
+                newMessages[x+1] = this.messages[x]
+            }
+            this.messages = newMessages
             axios.post('/messages', message, channel_id)
         }
     }

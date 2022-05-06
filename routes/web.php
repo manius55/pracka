@@ -48,3 +48,4 @@ Route::get('/channelUsers/{id}', [ChannelController::class, 'getChannelUsers']);
 Route::post('/channel/create', [ChannelController::class, 'createChannel']);
 Route::post('/channel/addUser/{channel}/{user}', [ChannelController::class, 'addUser']);
 Route::post('/messages', [ChannelController::class, 'newMessage']);
+Route::delete('/channel/{id}', [ChannelController::class, 'deleteChannel']);
