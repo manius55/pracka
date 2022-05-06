@@ -27,6 +27,7 @@ Vue.component('invitations-list', require('./components/InvitationsList.vue').de
 Vue.component('my-invitations-list', require('./components/MyInvitationsList.vue').default);
 Vue.component('add-friend', require('./components/AddFriend.vue').default);
 Vue.component('add-specificfriend', require('./components/AddSpecificFriend.vue').default);
+Vue.component('add-user', require('./components/AddUser.vue').default);
 Vue.component('new-message', require('./components/NewMessage.vue').default);
 Vue.component('messages', require('./components/Messages.vue').default);
 Vue.component('channels', require('./components/Channels.vue').default);

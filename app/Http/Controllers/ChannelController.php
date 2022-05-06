@@ -58,6 +58,18 @@ class ChannelController extends Controller
             'admin' => $admin
         ]);
     }
+
+    public function getChannelUsers(int $id)
+    {
+        $users = User::all()->toArray();
+        $channelsUsers = DB::table('user_channels')->where('channel_id', '=', $id)->get()->toArray();
+
+        return view('channels.channelUsersList', [
+            'users' => $users,
+            'channels_users' => $channelsUsers,
+            'id' => $id
+        ]);
+    }
     public function newMessage(Request $request)
     {
         $data = $request->request->all();
@@ -138,6 +150,14 @@ class ChannelController extends Controller
         return redirect('/channel');
     }
 
+    public function addUser(int $channelId, int $userId)
+    {
+        $newUser = UserChannels::create([
+           'channel_id' => $channelId,
+            'user_id' =>$userId
+        ]);
+    }
+
     public function editChannel(Request $request, int $id)
     {
         $data = $request->request->all();
@@ -163,6 +183,11 @@ class ChannelController extends Controller
 
         $channel->channel_name = $data['channel_name'];
         $channel->save();
+    }
+
+    public function editChannelUser()
+    {
+
     }
 
     public function deleteChannel(int $id)
