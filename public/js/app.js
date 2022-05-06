@@ -5657,8 +5657,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "ChannelUsers"
+  name: "ChannelUsers",
+  props: {
+    users: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    },
+    id: {
+      type: Number,
+      "default": 0
+    }
+  },
+  methods: {
+    currentUser: function currentUser(id) {
+      if (this.id !== id) {
+        return true;
+      }
+
+      return false;
+    }
+  }
 });
 
 /***/ }),
@@ -36873,7 +36901,34 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "div",
+    _vm._l(_vm.users, function (user) {
+      return _c("div", { staticClass: "row my-3" }, [
+        _vm.currentUser(user.id)
+          ? _c(
+              "span",
+              {
+                staticClass: "col-2 border rounded mx-2",
+                staticStyle: { "text-justify": "auto" },
+              },
+              [
+                _c("img", {
+                  staticClass: "rounded-circle",
+                  staticStyle: { height: "20px" },
+                  attrs: { src: "/storage/img/" + user.image, alt: "avatar" },
+                }),
+                _vm._v(" "),
+                _c("strong", { staticClass: "h5" }, [
+                  _vm._v(_vm._s(user.name)),
+                ]),
+              ]
+            )
+          : _vm._e(),
+      ])
+    }),
+    0
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

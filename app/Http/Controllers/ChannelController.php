@@ -63,6 +63,10 @@ class ChannelController extends Controller
     {
         $users = User::all()->toArray();
         $channelsUsers = DB::table('user_channels')->where('channel_id', '=', $id)->get()->toArray();
+        $channelUsersWithImage = DB::table('users')
+            ->join('user_profiles', 'users.id','=','user_profiles.user_id')
+            ->select('users.name', 'users.id', 'user_profiles.image')->get();
+
         $friendsIds = DB::table('friends')->where('user_id', '=', Auth::id())->pluck('friend_id')->toArray();
         $friends = DB::table('users')->whereIn('id', $friendsIds)->get()->toArray();
         $owner = ChannelAdmin::where([
@@ -75,7 +79,8 @@ class ChannelController extends Controller
             'channels_users' => $channelsUsers,
             'id' => $id,
             'friends' => $friends,
-            'owner' => $owner
+            'owner' => $owner,
+            'channel_users_with_image' => $channelUsersWithImage
         ]);
     }
     public function newMessage(Request $request)
