@@ -11411,7 +11411,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.channels-container[data-v-1664d13b] {\n    padding: 16px 0;\n    border-right: 1px #e6ecf3;\n}\n.channel[data-v-1664d13b] {\n    padding: 10px;\n    cursor: pointer;\n    border-bottom: 1px solid #f0f4f8;\n}\nul[data-v-1664d13b] {\n    list-style-type: none;\n    margin: 0;\n    padding: 0;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.channels-container[data-v-1664d13b] {\r\n    padding: 16px 0;\r\n    border-right: 1px #e6ecf3;\n}\n.channel[data-v-1664d13b] {\r\n    padding: 10px;\r\n    cursor: pointer;\r\n    border-bottom: 1px solid #f0f4f8;\n}\nul[data-v-1664d13b] {\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11435,7 +11435,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nul[data-v-62dade92] {\n    list-style-type: none;\n    margin: 0;\n    padding: 0;\n}\nli[data-v-62dade92] {\n    padding: 5px;\n}\n.chat-text[data-v-62dade92] {\n    color: #444;\n    padding: 8px 20px;\n    line-height: 5px;\n    font-size: 15px;\n    border-radius: 8px;\n    display: inline-block;\n    position: relative;\n    background: #efefef;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nul[data-v-62dade92] {\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\n}\nli[data-v-62dade92] {\r\n    padding: 5px;\n}\n.chat-text[data-v-62dade92] {\r\n    color: #444;\r\n    padding: 8px 20px;\r\n    line-height: 5px;\r\n    font-size: 15px;\r\n    border-radius: 8px;\r\n    display: inline-block;\r\n    position: relative;\r\n    background: #efefef;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11459,7 +11459,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-mask[data-v-53ab54d2] {\n    position: fixed;\n    z-index: 9998;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0, 0, 0, 0.5);\n    display: table;\n    transition: opacity 0.3s ease;\n}\n.modal-wrapper[data-v-53ab54d2] {\n    display: table-cell;\n    vertical-align: middle;\n}\n.modal-container[data-v-53ab54d2] {\n    margin: 0px auto;\n    padding: 20px 30px;\n    background-color: #fff;\n    border-radius: 2px;\n    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\n    transition: all 0.3s ease;\n}\n.modal-header h3[data-v-53ab54d2] {\n    margin-top: 0;\n    color: #42b983;\n}\n.modal-body[data-v-53ab54d2] {\n    margin: 80px 0;\n}\n.modal-default-button[data-v-53ab54d2] {\n}\n.modal-enter-from[data-v-53ab54d2] {\n    opacity: 0;\n}\n.modal-leave-to[data-v-53ab54d2] {\n    opacity: 0;\n}\n.modal-enter-from .modal-container[data-v-53ab54d2],\n.modal-leave-to .modal-container[data-v-53ab54d2] {\n    transform: scale(1.1);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-mask[data-v-53ab54d2] {\r\n    position: fixed;\r\n    z-index: 9998;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: rgba(0, 0, 0, 0.5);\r\n    display: table;\r\n    transition: opacity 0.3s ease;\n}\n.modal-wrapper[data-v-53ab54d2] {\r\n    display: table-cell;\r\n    vertical-align: middle;\n}\n.modal-container[data-v-53ab54d2] {\r\n    margin: 0px auto;\r\n    padding: 20px 30px;\r\n    background-color: #fff;\r\n    border-radius: 2px;\r\n    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\r\n    transition: all 0.3s ease;\n}\n.modal-header h3[data-v-53ab54d2] {\r\n    margin-top: 0;\r\n    color: #42b983;\n}\n.modal-body[data-v-53ab54d2] {\r\n    margin: 80px 0;\n}\n.modal-default-button[data-v-53ab54d2] {\n}\n.modal-enter-from[data-v-53ab54d2] {\r\n    opacity: 0;\n}\n.modal-leave-to[data-v-53ab54d2] {\r\n    opacity: 0;\n}\n.modal-enter-from .modal-container[data-v-53ab54d2],\r\n.modal-leave-to .modal-container[data-v-53ab54d2] {\r\n    transform: scale(1.1);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
