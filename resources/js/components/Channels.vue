@@ -6,16 +6,16 @@
                 <li v-for="channel in channels" class="channel" @click="pushToNewLocation(channel.id)">
                     <div v-if="choosenChannel(channel.id)" style="background: #efefef;">
                         <img
-                            :src="'/storage/img/' + channel.image"
-                            alt="image" style="height: 20px"
+                            :src="'https://pracka-images.s3.eu-central-1.amazonaws.com/images/' + channel.image"
+                            alt="image" style="height: 20px; width: 20px"
                             class="rounded-circle"
                         >
                         <span class="h5">{{ channel.channel_name }}</span>
                     </div>
                     <div v-else>
                         <img
-                            :src="'/storage/img/' + channel.image"
-                            alt="image" style="height: 20px"
+                            :src="'https://pracka-images.s3.eu-central-1.amazonaws.com/images/' + channel.image"
+                            alt="image" style="height: 20px; width: 20px"
                             class="rounded-circle"
                         >
                         <span class="h5">{{ channel.channel_name }}</span>

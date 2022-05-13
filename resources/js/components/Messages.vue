@@ -10,7 +10,7 @@
                                     <span style="font-size: 10px">{{ formatDate(message.created_at) }}</span>
                                     <span @click="routeToUserProfile(message.user.id)">
                                         <strong>{{ message.user.name }}</strong>
-                                        <img :src="'/storage/img/' + message.user.image" alt="avatar" style="height: 20px" class="rounded-circle"/>
+                                        <img :src="'https://pracka-images.s3.eu-central-1.amazonaws.com/images/' + message.user.image" alt="avatar" style="height: 20px; width: 20px" class="rounded-circle"/>
                                     </span>
                                 </div>
                                 <div class="chat-text">
@@ -22,7 +22,7 @@
                             <div class="text-start content-start">
                                 <div>
                                     <span @click="routeToUserProfile(message.user.id)">
-                                        <img :src="'/storage/img/' + message.user.image" alt="avatar" style="height: 20px" class="rounded-circle"/>
+                                        <img :src="'https://pracka-images.s3.eu-central-1.amazonaws.com/images/default.png'" alt="avatar" style="height: 20px; width: 20px" class="rounded-circle"/>
                                         <strong>{{ message.user.name }}</strong>
                                     </span>
                                     <span style="font-size: 10px">{{ formatDate(message.created_at) }}</span>

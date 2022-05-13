@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Events\MessageSent;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ChannelController extends Controller
 {
@@ -128,23 +129,18 @@ class ChannelController extends Controller
             $validated = $request->validate([
                 'image' => 'required|image|mimes:jpg,png,jpeg'
             ]);
-            $name = $request->file('image')->getClientOriginalName();
-            $nameAndExt = explode('.', $name);
-            $ext = end($nameAndExt);
-            $uId = uniqid();
-            $request->file('image')->move(public_path('storage/img'), $uId . '.' . $ext);
+            $path = $request->file('image')->store('images', 's3');
+            $name = substr($path,  strpos($path, '/')+1);
 
             $channel = Channels::create([
                 'channel_name' => $data['channel_name'],
-                'image' => $uId . '.' . $ext
+                'image' => $name
             ]);
-
-            if(File::exists(public_path('storage/img' . $channel->image)) && $channel->image !== 'default.png')
-                File::delete(public_path('storage/img' . $channel->image));
         }
         else {
             $channel = Channels::create([
-                'channel_name' => $data['channel_name']
+                'channel_name' => $data['channel_name'],
+                'image' => 'default.png'
             ]);
         }
 

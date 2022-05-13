@@ -67,8 +67,8 @@ class ProfileController extends Controller
             $path = $request->file('image')->store('images', 's3');
             $name = substr($path,  strpos($path, '/')+1);
 
-            if(Storage::exists('images/' . $profile->image) && $profile->image !== 'images/default.png')
-                Storage::delete('/images' . $profile->image);
+            if(Storage::disk('s3')->exists('images/' . $profile->image) && $profile->image !== 'images/default.png')
+                Storage::disk('s3')->delete('images/' . $profile->image);
 
             $profile->image = $name;
         }

@@ -6360,8 +6360,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "9bd017030ce620b4a380",
-  cluster: "eu",
+  key: '9bd017030ce620b4a380',
+  cluster: 'eu',
   forceTLS: true
 });
 
@@ -11411,7 +11411,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.channels-container[data-v-1664d13b] {\r\n    padding: 16px 0;\r\n    border-right: 1px #e6ecf3;\n}\n.channel[data-v-1664d13b] {\r\n    padding: 10px;\r\n    cursor: pointer;\r\n    border-bottom: 1px solid #f0f4f8;\n}\nul[data-v-1664d13b] {\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.channels-container[data-v-1664d13b] {\n    padding: 16px 0;\n    border-right: 1px #e6ecf3;\n}\n.channel[data-v-1664d13b] {\n    padding: 10px;\n    cursor: pointer;\n    border-bottom: 1px solid #f0f4f8;\n}\nul[data-v-1664d13b] {\n    list-style-type: none;\n    margin: 0;\n    padding: 0;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11435,7 +11435,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nul[data-v-62dade92] {\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\n}\nli[data-v-62dade92] {\r\n    padding: 5px;\n}\n.chat-text[data-v-62dade92] {\r\n    color: #444;\r\n    padding: 8px 20px;\r\n    line-height: 5px;\r\n    font-size: 15px;\r\n    border-radius: 8px;\r\n    display: inline-block;\r\n    position: relative;\r\n    background: #efefef;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nul[data-v-62dade92] {\n    list-style-type: none;\n    margin: 0;\n    padding: 0;\n}\nli[data-v-62dade92] {\n    padding: 5px;\n}\n.chat-text[data-v-62dade92] {\n    color: #444;\n    padding: 8px 20px;\n    line-height: 5px;\n    font-size: 15px;\n    border-radius: 8px;\n    display: inline-block;\n    position: relative;\n    background: #efefef;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36916,7 +36916,12 @@ var render = function () {
                 _c("img", {
                   staticClass: "rounded-circle",
                   staticStyle: { height: "20px" },
-                  attrs: { src: "/storage/img/" + user.image, alt: "avatar" },
+                  attrs: {
+                    src:
+                      "https://pracka-images.s3.eu-central-1.amazonaws.com/images/" +
+                      user.image,
+                    alt: "avatar",
+                  },
                 }),
                 _vm._v(" "),
                 _c("strong", { staticClass: "h5" }, [
@@ -36975,9 +36980,11 @@ var render = function () {
                 ? _c("div", { staticStyle: { background: "#efefef" } }, [
                     _c("img", {
                       staticClass: "rounded-circle",
-                      staticStyle: { height: "20px" },
+                      staticStyle: { height: "20px", width: "20px" },
                       attrs: {
-                        src: "/storage/img/" + channel.image,
+                        src:
+                          "https://pracka-images.s3.eu-central-1.amazonaws.com/images/" +
+                          channel.image,
                         alt: "image",
                       },
                     }),
@@ -36989,9 +36996,11 @@ var render = function () {
                 : _c("div", [
                     _c("img", {
                       staticClass: "rounded-circle",
-                      staticStyle: { height: "20px" },
+                      staticStyle: { height: "20px", width: "20px" },
                       attrs: {
-                        src: "/storage/img/" + channel.image,
+                        src:
+                          "https://pracka-images.s3.eu-central-1.amazonaws.com/images/" +
+                          channel.image,
                         alt: "image",
                       },
                     }),
@@ -37396,9 +37405,14 @@ var render = function () {
                                 _vm._v(" "),
                                 _c("img", {
                                   staticClass: "rounded-circle",
-                                  staticStyle: { height: "20px" },
+                                  staticStyle: {
+                                    height: "20px",
+                                    width: "20px",
+                                  },
                                   attrs: {
-                                    src: "/storage/img/" + message.user.image,
+                                    src:
+                                      "https://pracka-images.s3.eu-central-1.amazonaws.com/images/" +
+                                      message.user.image,
                                     alt: "avatar",
                                   },
                                 }),
@@ -37428,9 +37442,12 @@ var render = function () {
                               [
                                 _c("img", {
                                   staticClass: "rounded-circle",
-                                  staticStyle: { height: "20px" },
+                                  staticStyle: {
+                                    height: "20px",
+                                    width: "20px",
+                                  },
                                   attrs: {
-                                    src: "/storage/img/" + message.user.image,
+                                    src: "https://pracka-images.s3.eu-central-1.amazonaws.com/images/default.png",
                                     alt: "avatar",
                                   },
                                 }),
