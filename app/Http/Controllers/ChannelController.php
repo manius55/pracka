@@ -63,11 +63,12 @@ class ChannelController extends Controller
     public function getChannelUsers(int $id)
     {
         $users = User::all()->toArray();
-        $channelsUsers = DB::table('user_channels')->where('channel_id', '=', $id)->get()->toArray();
+        $channelsUsers = DB::table('user_channels')->where('channel_id', '=', $id)->pluck('user_id')->toArray();
         $channelUsersWithImage = DB::table('users')
             ->join('user_profiles', 'users.id','=','user_profiles.user_id')
+            ->whereIn('users.id', $channelsUsers)
             ->select('users.name', 'users.id', 'user_profiles.image')->get();
-
+        
         $friendsIds = DB::table('friends')->where('user_id', '=', Auth::id())->pluck('friend_id')->toArray();
         $friends = DB::table('users')->whereIn('id', $friendsIds)->get()->toArray();
         $owner = ChannelAdmin::where([
