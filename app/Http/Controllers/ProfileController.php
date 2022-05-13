@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -63,16 +64,13 @@ class ProfileController extends Controller
             $validated = $request->validate([
                 'image' => 'required|image|mimes:jpg,png,jpeg'
             ]);
-            $name = $request->file('image')->getClientOriginalName();
-            $nameAndExt = explode('.', $name);
-            $ext = end($nameAndExt);
-            $uId = uniqid();
-            $request->file('image')->move(public_path('storage/img'), $uId . '.' . $ext);
+            $path = $request->file('image')->store('images', 's3');
+            $name = substr($path,  strpos($path, '/')+1);
 
-            if(File::exists(public_path('storage/img' . $profile->image)) && $profile->image !== 'default.png')
-                File::delete(public_path('storage/img' . $profile->image));
+            if(Storage::exists('images/' . $profile->image) && $profile->image !== 'images/default.png')
+                Storage::delete('/images' . $profile->image);
 
-            $profile->image = $uId . '.' . $ext;
+            $profile->image = $name;
         }
 
         $profile->description = $data['description'];

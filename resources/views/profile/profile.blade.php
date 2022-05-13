@@ -22,14 +22,14 @@
                 <div class="col-6">
                     @if($profile->image !== null)
                     <img
-                        src="{{asset('storage/img/' . $profile->image)}}"
+                        src="{{\Illuminate\Support\Facades\Storage::disk('s3')->temporaryUrl('images/' . $profile->image, '+60 minutes')}}"
                         alt="avatar"
                         class="rounded-circle mx-auto d-flex"
                         style="width: 100px; height: 100px"
                     >
                     @else
                         <img
-                            src="{{asset('storage/img/default.png')}}"
+                            src="{{\Illuminate\Support\Facades\Storage::disk('s3')->temporaryUrl('images/default.png', '+60 minutes')}}"
                             alt="avatar"
                             class="rounded-circle mx-auto d-flex"
                             style="width: 100px; height: 100px"
