@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Events\MessageSent;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
 class ChannelController extends Controller
@@ -24,41 +25,41 @@ class ChannelController extends Controller
     {
         $userChannels = DB::table('user_channels')->where('user_id', '=', Auth::id())->pluck('channel_id')->toArray();
         $channels = DB::table('channels')->whereIn('id', $userChannels)->get()->toArray();
-
         $user = User::where('id', '=', Auth::id())->first()->toArray();
         $image = DB::table('user_profiles')->where('user_id', '=', Auth::id())->first();
-        $user['image'] = $image->image;
+        $user['image'] = $image->image ?? 'default.png';
         $admin = ChannelAdmin::where('user_id', '=', Auth::id())->pluck('channel_id')->toArray();
 
-        return view('channels.channel',[
+        return Response::view('channels.channel',[
             'channels' => $channels,
             'user' => $user,
             'admin' => $admin
-        ]);
+        ], 200);
     }
 
     public function createChannelForm()
     {
-        return view('channels.createChannelForm');
+        return Response::view('channels.createChannelForm');
     }
 
     public function getChannel(int $id)
     {
         $userChannels = DB::table('user_channels')->where('user_id', '=', Auth::id())->pluck('channel_id')->toArray();
-        $channels = DB::table('channels')->whereIn('id', $userChannels)->get();
+        $channels = DB::table('channels')->whereIn('id', $userChannels)->get()->toArray();
 
         $user = User::where('id', '=', Auth::id())->first()->toArray();
         $image = DB::table('user_profiles')->where('user_id', '=', Auth::id())->first();
-        $user['image'] = $image->image;
+        $user['image'] = $image->image ?? 'default.png';
         $admin = ChannelAdmin::where('user_id', '=', Auth::id())->pluck('channel_id')->toArray();
 
-        return view('channels.channel',[
+        return Response::view('channels.channel',[
             'channels' => $channels,
             'user' => $user,
             'id' => $id,
             'admin' => $admin
-        ]);
+        ], 200);
     }
+
 
     public function getChannelUsers(int $id)
     {
@@ -68,7 +69,7 @@ class ChannelController extends Controller
             ->join('user_profiles', 'users.id','=','user_profiles.user_id')
             ->whereIn('users.id', $channelsUsers)
             ->select('users.name', 'users.id', 'user_profiles.image')->get();
-        
+
         $friendsIds = DB::table('friends')->where('user_id', '=', Auth::id())->pluck('friend_id')->toArray();
         $friends = DB::table('users')->whereIn('id', $friendsIds)->get()->toArray();
         $owner = ChannelAdmin::where([
@@ -76,15 +77,16 @@ class ChannelController extends Controller
             ['owner', '=', true]
         ])->pluck('channel_id')->toArray();
 
-        return view('channels.channelUsersList', [
+        return Response::view('channels.channelUsersList', [
             'users' => $users,
             'channels_users' => $channelsUsers,
             'id' => $id,
             'friends' => $friends,
             'owner' => $owner,
             'channel_users_with_image' => $channelUsersWithImage
-        ]);
+        ], 200);
     }
+
     public function newMessage(Request $request)
     {
         $data = $request->request->all();
@@ -96,9 +98,11 @@ class ChannelController extends Controller
         ]);
         $user = User::where('id', '=', Auth::id())->first()->toArray();
         $image = DB::table('user_profiles')->where('user_id', '=', Auth::id())->first();
-        $user['image'] = $image->image;
+        $user['image'] = $image->image ?? 'default.png';
 
         broadcast(new MessageSent($user, $createdMessage))->toOthers();
+
+        return Response::json($createdMessage, 201);
     }
 
     public function messagesWithUser()
@@ -108,13 +112,13 @@ class ChannelController extends Controller
         foreach ($messageWithUser as $object) {
             $user = $object['user'];
             $image = DB::table('user_profiles')->where('user_id', '=', $user['id'])->first();
-            $image = $image->image;
+            $image = $image->image ?? 'default';
             $user['image'] = $image;
             $object['user'] = $user;
             array_push($messageWithUserAndImage, $object);
         }
 
-        return $messageWithUserAndImage;
+        return Response::json($messageWithUserAndImage, 200);
     }
 
     public function createChannel(Request $request)
@@ -122,7 +126,7 @@ class ChannelController extends Controller
         $data = $request->request->all();
         if ($data['channel_name'] === null && !($request->hasFile('image')))
         {
-            return redirect('/channel');
+            return Response::redirectTo('/channel', 400);
         }
 
         if($request->hasFile('image'))
@@ -157,7 +161,7 @@ class ChannelController extends Controller
             'owner' => true
         ]);
 
-        return redirect('/channel');
+        return Response::redirectTo('/channel', 201);
     }
 
     public function addUser(int $channelId, int $userId)
@@ -166,6 +170,8 @@ class ChannelController extends Controller
            'channel_id' => $channelId,
             'user_id' =>$userId
         ]);
+
+        return Response::json($newUser, 201);
     }
 
     public function editChannel(Request $request, int $id)
@@ -193,6 +199,8 @@ class ChannelController extends Controller
 
         $channel->channel_name = $data['channel_name'];
         $channel->save();
+
+        return Response::json($channel, 200);
     }
 
     public function editChannelUser()
@@ -206,5 +214,7 @@ class ChannelController extends Controller
         $userChannels = DB::table('user_channels')->where('channel_id', '=', $id)->delete();
         $channelMessages = DB::table('channel_messages')->where('channel_id', '=', $id)->delete();
         $channel = DB::table('channels')->where('id', '=', $id)->delete();
+
+        return Response::json(null, 204);
     }
 }
