@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
@@ -36,21 +37,21 @@ class ProfileController extends Controller
             ['from_user', '=', Auth::id()],
             ['accepted', '=', false]
         ])->pluck('to_user')->toArray();
-        return view('profile.profile', [
+        return Response::view('profile.profile', [
             'profile' => $profile,
             'user' => $user,
             'friends' => $friendsUsers,
             'invitations' => $invitations,
             'invited' => $invited
-        ]);
+        ], 200);
     }
 
     function editForm(int $id)
     {
         $profile = DB::table('user_profiles')->where('user_id', '=', $id)->first();
-        return view('profile.editForm', [
+        return Response::view('profile.editForm', [
             'profile' => $profile
-        ]);
+        ], 200);
     }
 
     function edit(int $id, Request $request)
@@ -77,6 +78,6 @@ class ProfileController extends Controller
         $profile->date_of_birth = $data['date_of_birth'];
         $profile->save();
 
-        return redirect('/profile/' . $id);
+        return Response::redirectTo('/profile/' . $id, 302);
     }
 }

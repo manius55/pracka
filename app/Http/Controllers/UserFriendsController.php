@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Friends;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 
 class UserFriendsController extends Controller
 {
@@ -31,17 +32,17 @@ class UserFriendsController extends Controller
         ])->pluck('to_user')->toArray();
 
 
-        return view('friends', [
+        return Response::view('friends', [
             'friends' => $friendsUsers,
             'users' => $users,
             'invitations' => $invitations,
             'invited' => $invited
-        ]);
+        ], 200);
     }
 
     function create(int $id)
     {
-        Friends::create([
+        $friend = Friends::create([
             'user_id' => Auth::id(),
             'friend_id' => $id
         ]);
@@ -49,6 +50,8 @@ class UserFriendsController extends Controller
             'user_id' => $id,
             'friend_id' => Auth::id()
         ]);
+
+        return Response::json($friend, 201);
     }
 
     function delete(int $id)
@@ -68,6 +71,12 @@ class UserFriendsController extends Controller
             ['to_user', '=', Auth::id()]
         ])->delete();
 
+        DB::table('invitations')->where([
+            ['from_user', '=' , Auth::id()],
+            ['to_user', '=', $id]
+        ])->delete();
+
+         return Response::json(null, 204);
     }
 
     function update(int $if, int $userId)

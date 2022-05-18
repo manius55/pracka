@@ -6,6 +6,7 @@ use App\Models\Invitations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 
 class InvitationsController extends Controller
 {
@@ -14,12 +15,14 @@ class InvitationsController extends Controller
         $user = DB::table('users')->where('name', '=', $name)->first();
         if (DB::table('friends')->where('friend_id', '=', $user->id)->doesntExist())
         {
-            Invitations::create([
+            $invitation = Invitations::create([
                 'from_user' => Auth::id(),
                 'to_user' => $user->id,
                 'accepted' => false,
             ]);
         }
+
+        return Response::json($invitation, 201);
     }
 
     public function getInvitations()
@@ -31,9 +34,9 @@ class InvitationsController extends Controller
 
         $invitationsUsers = DB::table('users')->whereIn('id', $invitationsId)->get()->toArray();
 
-        return view('invitations', [
+        return Response::view('invitations', [
             'users' => $invitationsUsers
-        ]);
+        ], 200);
     }
 
     public function getMyInvitations()
@@ -45,9 +48,9 @@ class InvitationsController extends Controller
 
         $invitationsUsers = DB::table('users')->whereIn('id', $invitationsId)->get()->toArray();
 
-        return view('myInvitations', [
+        return Response::view('myInvitations', [
             'users' => $invitationsUsers
-        ]);
+        ], 200);
     }
 
     public function delete(int $id)
@@ -56,6 +59,8 @@ class InvitationsController extends Controller
            ['from_user', '=' , $id],
            ['to_user', '=', Auth::id()]
         ])->delete();
+
+        return Response::json(null, 204);
     }
 
     public function deleteMyInvitation(int $id)
@@ -64,6 +69,8 @@ class InvitationsController extends Controller
             ['from_user', '=' , Auth::id()],
             ['to_user', '=', $id]
         ])->delete();
+
+        return Response::json(null, 204);
     }
 
     public function update(int $id)
@@ -74,6 +81,7 @@ class InvitationsController extends Controller
         ])->update([
             'accepted' => true
         ]);
-        dump($invitation);
+
+        return Response::json($invitation, 200);
     }
 }

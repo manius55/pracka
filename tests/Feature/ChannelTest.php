@@ -87,7 +87,6 @@ class ChannelTest extends TestCase
 
     public function test_create_channel()
     {
-        $this->withoutExceptionHandling();
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)->post('/channel/create', [
@@ -98,11 +97,20 @@ class ChannelTest extends TestCase
 
     public function test_add_user()
     {
-        $this->withoutExceptionHandling();
         $user = User::factory()->create();
         $channel = Channels::create(['channel_name' => 'test']);
 
         $response = $this->actingAs($user)->post('/channel/addUser/' . $channel->id . '/' . $user->id);
         $response->assertStatus(201);
+    }
+
+    public function test_delete_channel()
+    {
+        $this->withoutExceptionHandling();
+        $user = User::factory()->create();
+        $channel = Channels::create(['channel_name' => 'test']);
+
+        $response = $this->actingAs($user)->delete('/channel/' . $channel->id);
+        $response->assertStatus(204);
     }
 }
