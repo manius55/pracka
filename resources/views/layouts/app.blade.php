@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{url('/channel')}}">Kanały</a>
-                <a class="navbar-brand" href="{{url('/friends/' . Auth::id())}}">Lista znajomych</a>
+                <a class="navbar-brand" href="{{url('/friends/' . (Auth::id() ?? 0))}}">Lista znajomych</a>
                 <a class="navbar-brand" href="{{url('/invitations')}}">Otrzymane zaproszenia</a>
                 <a class="navbar-brand" href="{{url('/myInvitations')}}">Wysłane zaproszenia</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

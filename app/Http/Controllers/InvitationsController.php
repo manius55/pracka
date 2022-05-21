@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Response;
 
 class InvitationsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function sendInvitation(string $name)
     {
         $user = DB::table('users')->where('name', '=', $name)->first();

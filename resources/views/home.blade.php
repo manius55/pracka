@@ -8,14 +8,14 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                    @if (\Illuminate\Support\Facades\Auth::check())
+                        <div class="h3">Hello {{ $name }}, you are logged in</div>
+                    @else
+                        <div class="h3">
+                        {{ __('Hello, you need to') }}
+                        <a href="{{ url('/login') }}">Log in</a>
                         </div>
                     @endif
-
-                    {{ __('Hello, you need to') }}
-                        <a href="{{ url('/login') }}">Log in</a>
                 </div>
             </div>
         </div>

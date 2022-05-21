@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     function get(int $id)
     {
         $profile = DB::table('user_profiles')->where('user_id', '=', $id)->first();

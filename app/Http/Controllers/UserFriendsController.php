@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Response;
 
 class UserFriendsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     function get(int $id)
     {
         $friends = Friends::where('user_id', '=', $id)->get();
