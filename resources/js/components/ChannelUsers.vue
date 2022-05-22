@@ -1,10 +1,13 @@
 <template>
  <div>
      <div v-for="user in users" class="row my-3">
-             <span class="col-2 border rounded mx-2" style="text-justify: auto " v-if="currentUser(user.id)">
+         <div class="mx-2" v-if="currentUser(user.id)">
+             <span class="col-3 border rounded" style="text-justify: auto ">
                     <img :src="'https://pracka-images.s3.eu-central-1.amazonaws.com/images/' + user.image" alt="avatar" style="height: 20px" class="rounded-circle"/>
                     <strong class="h5">{{ user.name }}</strong>
              </span>
+             <span v-if="editPrivileges(user.id)" style="font-size: 10px"> Admin <input type="checkbox" v-model="user.admin" @click="changeAdminStatus(user.id)"></span>
+         </div>
      </div>
  </div>
 </template>
@@ -22,6 +25,10 @@ export default {
         id: {
             type: Number,
             default: 0
+        },
+        channel: {
+            type: Number,
+            default: 0
         }
     },
     methods: {
@@ -30,6 +37,20 @@ export default {
                 return true
             }
             return false
+        },
+        editPrivileges(id) {
+            let currentUser = this.users.find(x => x.id === this.id)
+            let user = this.users.find(x => x.id === id)
+
+            if (currentUser && currentUser.owner === true)
+                return true
+            if (user.admin === false)
+                return true
+            return false
+
+        },
+        changeAdminStatus(id) {
+            axios.put(`/channel/${ this.channel }/user/${ id }`)
         }
     }
 }

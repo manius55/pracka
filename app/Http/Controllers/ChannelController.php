@@ -227,9 +227,14 @@ class ChannelController extends Controller
         return Response::redirectTo('/channel', 302);
     }
 
-    public function editChannelUser()
+    public function editAdminStatus(int $channelId, int $userId)
     {
+        if (ChannelAdmin::where('channel_id', '=', $channelId)->where('user_id', '=', $userId)->get()->toArray() !== [])
+            ChannelAdmin::where('channel_id', '=', $channelId)->where('user_id', '=', $userId)->delete();
+        else
+            ChannelAdmin::create(['channel_id' => $channelId,'user_id' => $userId, 'owner' => false]);
 
+        return Response::json([], 200);
     }
 
     public function deleteChannel(int $id)
