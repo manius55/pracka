@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     @if (\Illuminate\Support\Facades\Auth::check())
-                        <div class="h3">Hello {{ $name }}, you are logged in</div>
+                        <div class="h3">Hello {{ $name ?? '' }}, you are logged in</div>
                     @else
                         <div class="h3">
                         {{ __('Hello, you need to') }}

@@ -174,33 +174,39 @@ class ChannelController extends Controller
         return Response::json($newUser, 201);
     }
 
+    public function editChannelForm(int $id)
+    {
+        $channel = DB::table('channels')->find($id);
+        return Response::view('channels.editChannelForm', [
+            'channel' => $channel
+        ], 200);
+    }
+
     public function editChannel(Request $request, int $id)
     {
         $data = $request->request->all();
 
-        $channel = DB::table('channels')->find($id);
+        $channel = Channels::find($id);
 
         if($request->hasFile('image'))
         {
             $validated = $request->validate([
-                'image' => 'required|image|mimes:jpg,png,jpeg'
+                'image' => 'required|image|mimes:jpg,png,jpeg',
+                'channel_name' => 'required|string'
             ]);
-            $name = $request->file('image')->getClientOriginalName();
-            $nameAndExt = explode('.', $name);
-            $ext = end($nameAndExt);
-            $uId = uniqid();
-            $request->file('image')->move(public_path('storage/img'), $uId . '.' . $ext);
+            $path = $request->file('image')->store('images', 's3');
+            $name = substr($path,  strpos($path, '/')+1);
 
-            if(File::exists(public_path('storage/img' . $channel->image)) && $channel->image !== 'default.png')
-                File::delete(public_path('storage/img' . $channel->image));
+            if(Storage::disk('s3')->exists('images/' . $channel->image) && $channel->image !== 'images/default.png')
+                Storage::disk('s3')->delete('images/' . $channel->image);
 
-            $channel->image = $uId . '.' . $ext;
+            $channel->image = $name;
         }
 
         $channel->channel_name = $data['channel_name'];
         $channel->save();
 
-        return Response::json($channel, 200);
+        return Response::redirectTo('/channel', 302);
     }
 
     public function editChannelUser()

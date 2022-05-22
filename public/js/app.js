@@ -5798,6 +5798,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "DeleteChannel",
   props: {
@@ -37123,6 +37124,15 @@ var render = function () {
           },
         ]),
       }),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { href: "/channel/" + this.id + "/editChannelForm" },
+        },
+        [_vm._v("Edytuj kanał")]
+      ),
     ],
     1
   )

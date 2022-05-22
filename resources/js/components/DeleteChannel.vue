@@ -24,6 +24,7 @@
                 </button>
             </template>
         </modal>
+        <a class="btn btn-primary" :href="'/channel/' + this.id + '/editChannelForm'">Edytuj kanał</a>
     </div>
 </template>
 
@@ -48,7 +49,7 @@ export default {
             axios.delete(`/channel/${this.id}`)
             this.showModal()
             location.href = '/channel'
-        }
+        },
     },
 }
 </script>
