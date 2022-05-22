@@ -69,6 +69,24 @@ class ChannelController extends Controller
             ->join('user_profiles', 'users.id','=','user_profiles.user_id')
             ->whereIn('users.id', $channelsUsers)
             ->select('users.name', 'users.id', 'user_profiles.image')->get();
+        foreach ($channelUsersWithImage as $user)
+        {
+            $userIsAdmin = (DB::table('channel_admins')->where('user_id', '=', $user->id)->where('channel_id', '=', $id)->first()) ?? null;
+
+            if ($userIsAdmin !== null)
+            {
+                $user->admin = true;
+                if ($userIsAdmin->owner === 1)
+                    $user->owner = true;
+                else
+                    $user->owner = false;
+            }
+            else
+            {
+                $user->admin = false;
+                $user->owner = false;
+            }
+        }
 
         $friendsIds = DB::table('friends')->where('user_id', '=', Auth::id())->pluck('friend_id')->toArray();
         $friends = DB::table('users')->whereIn('id', $friendsIds)->get()->toArray();
