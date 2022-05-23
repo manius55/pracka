@@ -246,4 +246,13 @@ class ChannelController extends Controller
 
         return Response::json(null, 204);
     }
+
+    public function deleteUserFromChannel(int $channelId, int $userId)
+    {
+        if (ChannelAdmin::where('channel_id', '=', $channelId)->where('user_id', '=', $userId)->get()->toArray() !== [])
+            ChannelAdmin::where('channel_id', '=', $channelId)->where('user_id', '=', $userId)->delete();
+        UserChannels::where('user_id', '=', $userId)->where('channel_id', '=', $channelId)->delete();
+
+        return Response::json(null, 204);
+    }
 }

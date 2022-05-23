@@ -7,6 +7,32 @@
                     <strong class="h5">{{ user.name }}</strong>
              </span>
              <span v-if="editPrivileges(user.id)" style="font-size: 10px"> Admin <input type="checkbox" v-model="user.admin" @click="changeAdminStatus(user.id)"></span>
+             <button class="btn btn-danger btn-sm" @click="showModal()" v-if="editPrivileges(user.id)">Usuń</button>
+             <modal :show="show">
+                 <template #header>
+                     Usuwanie użytkownika z kanału
+                 </template>
+                 <template #body>
+                     <div class="form-group text-start">
+                         Czy na pewno chcesz usunąć z kanału tego użytkownika ?
+                     </div>
+                 </template>
+                 <template #footer>
+                     <button
+                         class="btn btn-success col-2"
+                         @click="deleteUserFromChannel(user.id)"
+                     >
+                         Potwierdź
+                     </button>
+
+                     <button
+                         class="btn btn-danger col-2"
+                         @click="showModal()"
+                     >
+                         Anuluj
+                     </button>
+                 </template>
+             </modal>
          </div>
      </div>
  </div>
@@ -29,6 +55,10 @@ export default {
         channel: {
             type: Number,
             default: 0
+        },
+        show: {
+            type: Boolean,
+            default: false
         }
     },
     methods: {
@@ -50,8 +80,16 @@ export default {
 
         },
         changeAdminStatus(id) {
-            axios.put(`/channel/${ this.channel }/user/${ id }`)
-        }
+            axios.put(`/channel/${this.channel}/user/${id}`)
+        },
+        showModal() {
+            this.show = !this.show
+        },
+        deleteUserFromChannel(id) {
+            axios.delete(`/channel/${this.channel}/user/${id}`)
+            this.showModal()
+            location.reload()
+        },
     }
 }
 </script>

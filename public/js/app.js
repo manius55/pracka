@@ -5667,6 +5667,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ChannelUsers",
   props: {
@@ -5683,6 +5709,10 @@ __webpack_require__.r(__webpack_exports__);
     channel: {
       type: Number,
       "default": 0
+    },
+    show: {
+      type: Boolean,
+      "default": false
     }
   },
   methods: {
@@ -5708,6 +5738,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     changeAdminStatus: function changeAdminStatus(id) {
       axios.put("/channel/".concat(this.channel, "/user/").concat(id));
+    },
+    showModal: function showModal() {
+      this.show = !this.show;
+    },
+    deleteUserFromChannel: function deleteUserFromChannel(id) {
+      axios["delete"]("/channel/".concat(this.channel, "/user/").concat(id));
+      this.showModal();
+      location.reload();
     }
   }
 });
@@ -36930,80 +36968,179 @@ var render = function () {
     _vm._l(_vm.users, function (user) {
       return _c("div", { staticClass: "row my-3" }, [
         _vm.currentUser(user.id)
-          ? _c("div", { staticClass: "mx-2" }, [
-              _c(
-                "span",
-                {
-                  staticClass: "col-3 border rounded",
-                  staticStyle: { "text-justify": "auto" },
-                },
-                [
-                  _c("img", {
-                    staticClass: "rounded-circle",
-                    staticStyle: { height: "20px" },
-                    attrs: {
-                      src:
-                        "https://pracka-images.s3.eu-central-1.amazonaws.com/images/" +
-                        user.image,
-                      alt: "avatar",
-                    },
-                  }),
-                  _vm._v(" "),
-                  _c("strong", { staticClass: "h5" }, [
-                    _vm._v(_vm._s(user.name)),
-                  ]),
-                ]
-              ),
-              _vm._v(" "),
-              _vm.editPrivileges(user.id)
-                ? _c("span", { staticStyle: { "font-size": "10px" } }, [
-                    _vm._v(" Admin "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: user.admin,
-                          expression: "user.admin",
-                        },
-                      ],
-                      attrs: { type: "checkbox" },
-                      domProps: {
-                        checked: Array.isArray(user.admin)
-                          ? _vm._i(user.admin, null) > -1
-                          : user.admin,
-                      },
-                      on: {
-                        click: function ($event) {
-                          return _vm.changeAdminStatus(user.id)
-                        },
-                        change: function ($event) {
-                          var $$a = user.admin,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = null,
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 &&
-                                _vm.$set(user, "admin", $$a.concat([$$v]))
-                            } else {
-                              $$i > -1 &&
-                                _vm.$set(
-                                  user,
-                                  "admin",
-                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                                )
-                            }
-                          } else {
-                            _vm.$set(user, "admin", $$c)
-                          }
-                        },
+          ? _c(
+              "div",
+              { staticClass: "mx-2" },
+              [
+                _c(
+                  "span",
+                  {
+                    staticClass: "col-3 border rounded",
+                    staticStyle: { "text-justify": "auto" },
+                  },
+                  [
+                    _c("img", {
+                      staticClass: "rounded-circle",
+                      staticStyle: { height: "20px" },
+                      attrs: {
+                        src:
+                          "https://pracka-images.s3.eu-central-1.amazonaws.com/images/" +
+                          user.image,
+                        alt: "avatar",
                       },
                     }),
-                  ])
-                : _vm._e(),
-            ])
+                    _vm._v(" "),
+                    _c("strong", { staticClass: "h5" }, [
+                      _vm._v(_vm._s(user.name)),
+                    ]),
+                  ]
+                ),
+                _vm._v(" "),
+                _vm.editPrivileges(user.id)
+                  ? _c("span", { staticStyle: { "font-size": "10px" } }, [
+                      _vm._v(" Admin "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: user.admin,
+                            expression: "user.admin",
+                          },
+                        ],
+                        attrs: { type: "checkbox" },
+                        domProps: {
+                          checked: Array.isArray(user.admin)
+                            ? _vm._i(user.admin, null) > -1
+                            : user.admin,
+                        },
+                        on: {
+                          click: function ($event) {
+                            return _vm.changeAdminStatus(user.id)
+                          },
+                          change: function ($event) {
+                            var $$a = user.admin,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = null,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(user, "admin", $$a.concat([$$v]))
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    user,
+                                    "admin",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(user, "admin", $$c)
+                            }
+                          },
+                        },
+                      }),
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.editPrivileges(user.id)
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-sm",
+                        on: {
+                          click: function ($event) {
+                            return _vm.showModal()
+                          },
+                        },
+                      },
+                      [_vm._v("Usuń")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("modal", {
+                  attrs: { show: _vm.show },
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "header",
+                        fn: function () {
+                          return [
+                            _vm._v(
+                              "\n                    Usuwanie użytkownika z kanału\n                "
+                            ),
+                          ]
+                        },
+                        proxy: true,
+                      },
+                      {
+                        key: "body",
+                        fn: function () {
+                          return [
+                            _c(
+                              "div",
+                              { staticClass: "form-group text-start" },
+                              [
+                                _vm._v(
+                                  "\n                        Czy na pewno chcesz usunąć z kanału tego użytkownika ?\n                    "
+                                ),
+                              ]
+                            ),
+                          ]
+                        },
+                        proxy: true,
+                      },
+                      {
+                        key: "footer",
+                        fn: function () {
+                          return [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success col-2",
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.deleteUserFromChannel(user.id)
+                                  },
+                                },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        Potwierdź\n                    "
+                                ),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger col-2",
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.showModal()
+                                  },
+                                },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        Anuluj\n                    "
+                                ),
+                              ]
+                            ),
+                          ]
+                        },
+                        proxy: true,
+                      },
+                    ],
+                    null,
+                    true
+                  ),
+                }),
+              ],
+              1
+            )
           : _vm._e(),
       ])
     }),

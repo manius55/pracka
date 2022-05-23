@@ -52,3 +52,4 @@ Route::delete('/channel/{id}', [ChannelController::class, 'deleteChannel']);
 Route::put('/channel/{id}', [ChannelController::class, 'editChannel']);
 Route::get('/channel/{id}/editChannelForm', [ChannelController::class, 'editChannelForm']);
 Route::put('/channel/{id}/user/{user}', [ChannelController::class, 'editAdminStatus']);
+Route::delete('/channel/{id}/user/{user}', [ChannelController::class, 'deleteUserFromChannel']);
