@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserFriendsController;
 use \App\Http\Controllers\InvitationsController;
 use App\Http\Controllers\ChannelController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,3 +54,7 @@ Route::put('/channel/{id}', [ChannelController::class, 'editChannel']);
 Route::get('/channel/{id}/editChannelForm', [ChannelController::class, 'editChannelForm']);
 Route::put('/channel/{id}/user/{user}', [ChannelController::class, 'editAdminStatus']);
 Route::delete('/channel/{id}/user/{user}', [ChannelController::class, 'deleteUserFromChannel']);
+
+Route::get('/admin/users', [AdminController::class, 'usersList']);
+Route::get('/admin/channels', [AdminController::class, 'channelsList']);
+Route::get('/admin/channelsAdmins', [AdminController::class, 'channelsAdmins']);

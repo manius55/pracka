@@ -15,7 +15,6 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -27,16 +26,32 @@
                 <a class="navbar-brand" href="{{url('/friends/' . (Auth::id() ?? 0))}}">Lista znajomych</a>
                 <a class="navbar-brand" href="{{url('/invitations')}}">Otrzymane zaproszenia</a>
                 <a class="navbar-brand" href="{{url('/myInvitations')}}">Wysłane zaproszenia</a>
+                @if (\Illuminate\Support\Facades\DB::table('admins')->where('user_id', '=', \Illuminate\Support\Facades\Auth::id())->first() !== null)
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item dropdown">
+                                <a id="administrationNavbar" class="nav-link dropdown-toggle h5" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Administracja
+                                </a>
+                                <div class="dropdown-menu dropdown-menu" aria-labelledby="administrationNavbar">
+                                    <a class="dropdown-item" href="{{url('/admin/users')}}">
+                                        Użytkownicy
+                                    </a>
+                                    <a class="dropdown-item" href="{{url('/admin/channels')}}">
+                                        Kanały
+                                    </a>
+                                    <a class="dropdown-item" href="{{url('/admin/channelsAdmins')}}">
+                                        Kanały i administratorzy
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                @endif
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->

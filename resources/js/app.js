@@ -33,6 +33,9 @@ Vue.component('messages', require('./components/Messages.vue').default);
 Vue.component('channels', require('./components/Channels.vue').default);
 Vue.component('channel-users', require('./components/ChannelUsers.vue').default);
 Vue.component('delete-channel', require('./components/DeleteChannel.vue').default);
+Vue.component('users-list', require('./components/UsersList.vue').default);
+Vue.component('channels-list', require('./components/ChannelsList.vue').default);
+Vue.component('channels-admins-list', require('./components/ChannelsAdminsList.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
