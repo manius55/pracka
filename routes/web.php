@@ -19,7 +19,7 @@ use App\Http\Controllers\MailController;
 |
 */
 
-Route::get('/', function () {
+Route::get('', function () {
     return view('home');
 });
 

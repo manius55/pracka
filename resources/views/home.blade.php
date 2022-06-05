@@ -5,14 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">Komunikat strony głównej</div>
 
                 <div class="card-body">
                     @if (\Illuminate\Support\Facades\Auth::check())
-                        <div class="h3">Hello {{ $name ?? '' }}, you are logged in</div>
+                        <div class="h3">Cześć {{ $name ?? '' }}, jesteś zalogowany</div>
                     @else
                         <div class="h3">
-                        {{ __('Hello, you need to') }}
+                        Cześć, musisz się zalogować.
                         <a href="{{ url('/login') }}">Log in</a>
                         </div>
                     @endif
