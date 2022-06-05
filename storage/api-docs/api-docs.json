@@ -1,0 +1,108 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Praca inżynierska",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/admin/users": {
+            "get": {
+                "summary": "Lista użytkowników",
+                "description": "Widok listy użytkowników",
+                "operationId": "31c144f8fb04a263f21a06e4e5376663",
+                "responses": {
+                    "200": {
+                        "description": "Pobrano listę użytkowników"
+                    }
+                }
+            }
+        },
+        "/admin/channels": {
+            "get": {
+                "summary": "Lista kanałów",
+                "description": "Widok listy kanałów",
+                "operationId": "a66bcb980e8561dd6107dc6d276c48c4",
+                "responses": {
+                    "200": {
+                        "description": "Pobrano listę kanałów"
+                    }
+                }
+            }
+        },
+        "/admin/channelsAdmins": {
+            "get": {
+                "summary": "Lista kanałów i administratorów",
+                "description": "Widok listy kanałów wraz z administratorami",
+                "operationId": "94951ce9dcb35af3be0e2ec70b69f6d9",
+                "responses": {
+                    "200": {
+                        "description": "Pobrano listę kanałów i ich administratorów"
+                    }
+                }
+            }
+        },
+        "/channel": {
+            "get": {
+                "summary": "Domyślny kanał",
+                "description": "Widok domyślnego kanału",
+                "operationId": "04b9cb055b6f0185664951a7ecaf1a15",
+                "responses": {
+                    "200": {
+                        "description": "Otworzono widok kanału"
+                    }
+                }
+            }
+        },
+        "/channel/createForm": {
+            "get": {
+                "summary": "Widok formularza kanału",
+                "description": "Widok formularza tworzenia kanału",
+                "operationId": "f232ad3f5f38506f03f2dd55b8c178de",
+                "responses": {
+                    "200": {
+                        "description": "Otworzono widok tworzenia kanału"
+                    }
+                }
+            }
+        },
+        "/channel/{id}": {
+            "get": {
+                "summary": "Konkretny kanał",
+                "description": "Widok konkretnego kanału",
+                "operationId": "b1a144d62d3b22db5a4f4a4fbb1b618c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id kanału",
+                        "required": true,
+                        "example": "7"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Otworzono widok kanału"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "passport": {
+                "type": "oauth2",
+                "description": "Laravel passport oauth2 security.",
+                "in": "header",
+                "scheme": "https",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "http://localhost/oauth/authorize",
+                        "tokenUrl": "http://localhost/oauth/token",
+                        "refreshUrl": "http://localhost/token/refresh",
+                        "scopes": []
+                    }
+                }
+            }
+        }
+    }
+}

@@ -21,6 +21,18 @@ class ChannelController extends Controller
     {
         $this->middleware('auth');
     }
+
+    /**
+     * @OA\Get(
+     *     path="/channel",
+     *     summary="Domyślny kanał",
+     *     description="Widok domyślnego kanału",
+     *           @OA\Response (
+     *     response=200,
+     *     description="Otworzono widok kanału"
+     * )
+     * )
+     */
     public function index()
     {
         $userChannels = DB::table('user_channels')->where('user_id', '=', Auth::id())->pluck('channel_id')->toArray();
@@ -37,11 +49,40 @@ class ChannelController extends Controller
         ], 200);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/channel/createForm",
+     *     summary="Widok formularza kanału",
+     *     description="Widok formularza tworzenia kanału",
+     *           @OA\Response (
+     *     response=200,
+     *     description="Otworzono widok tworzenia kanału"
+     * )
+     * )
+     */
     public function createChannelForm()
     {
         return Response::view('channels.createChannelForm');
     }
 
+    /**
+     * @OA\Get(
+     *     path="/channel/{id}",
+     *     summary="Konkretny kanał",
+     *     description="Widok konkretnego kanału",
+     *     @OA\Parameter (
+     *     description="Id kanału",
+     *     in="path",
+     *     name="id",
+     *     required=true,
+     *     example="7",
+     *     ),
+     *           @OA\Response (
+     *     response=200,
+     *     description="Otworzono widok kanału"
+     * )
+     * )
+     */
     public function getChannel(int $id)
     {
         $userChannels = DB::table('user_channels')->where('user_id', '=', Auth::id())->pluck('channel_id')->toArray();
@@ -151,6 +192,9 @@ class ChannelController extends Controller
         {
             $validated = $request->validate([
                 'image' => 'required|image|mimes:jpg,png,jpeg'
+            ], [
+                'image' => 'Ten plik musi być obrazkiem',
+                'required' => 'To pole jest wymagane'
             ]);
             $path = $request->file('image')->store('images', 's3');
             $name = substr($path,  strpos($path, '/')+1);
@@ -211,6 +255,10 @@ class ChannelController extends Controller
             $validated = $request->validate([
                 'image' => 'required|image|mimes:jpg,png,jpeg',
                 'channel_name' => 'required|string'
+            ],[
+                'image' => 'Ten plik musi być obrazkiem',
+                'required' => 'To pole jest wymagane',
+                'string' => 'To pole musi być typu string'
             ]);
             $path = $request->file('image')->store('images', 's3');
             $name = substr($path,  strpos($path, '/')+1);

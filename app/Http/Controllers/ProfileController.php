@@ -68,6 +68,10 @@ class ProfileController extends Controller
         {
             $validated = $request->validate([
                 'image' => 'required|image|mimes:jpg,png,jpeg'
+            ],
+            [
+                'image' => 'Ten plik musi być obrazkiem',
+                'required' => 'To pole jest wymagane'
             ]);
             $path = $request->file('image')->store('images', 's3');
             $name = substr($path,  strpos($path, '/')+1);

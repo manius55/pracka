@@ -7,6 +7,7 @@ use App\Http\Controllers\UserFriendsController;
 use \App\Http\Controllers\InvitationsController;
 use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,3 +59,5 @@ Route::delete('/channel/{id}/user/{user}', [ChannelController::class, 'deleteUse
 Route::get('/admin/users', [AdminController::class, 'usersList']);
 Route::get('/admin/channels', [AdminController::class, 'channelsList']);
 Route::get('/admin/channelsAdmins', [AdminController::class, 'channelsAdmins']);
+
+Route::get('/email/{id}', [MailController::class, 'sendEmail']);

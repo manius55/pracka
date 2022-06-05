@@ -7,6 +7,7 @@
                         <a class="btn btn-success my-1" href="/channel/createForm">Stwórz kanał</a>
                     @if($channels!==[] && isset($admin) && ((isset($id) && in_array($id, $admin)) || in_array($channels[0]->id, $admin)))
                         <a class="btn-primary btn" href="{{ url('/channelUsers/' . json_encode($id ?? $channels[0]->id)) }}"> Zarządzaj kanałem</a>
+                        <a href="{{ url('/email/' . $id) }}" class="btn btn-primary">Poproś użytkowników o odwiedzenie serwera</a>
                     @endif
                 </div>
                 @if($channels !== [])
