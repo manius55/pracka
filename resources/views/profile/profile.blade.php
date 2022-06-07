@@ -22,7 +22,7 @@
                 <div class="col-6">
                     @if($profile->image !== null)
                     <img
-                        src="{{\Illuminate\Support\Facades\Storage::disk('s3')->temporaryUrl('images/' . $profile->image, '+60 minutes')}}"
+                        src="{{url('https://pracka-images.s3.eu-central-1.amazonaws.com/images/' . $profile->image)}}"
                         alt="avatar"
                         class="rounded-circle mx-auto d-flex"
                         style="width: 100px; height: 100px"

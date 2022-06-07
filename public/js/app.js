@@ -38191,7 +38191,9 @@ var render = function () {
                                     width: "20px",
                                   },
                                   attrs: {
-                                    src: "https://pracka-images.s3.eu-central-1.amazonaws.com/images/default.png",
+                                    src:
+                                      "https://pracka-images.s3.eu-central-1.amazonaws.com/images/" +
+                                      message.user.image,
                                     alt: "avatar",
                                   },
                                 }),
