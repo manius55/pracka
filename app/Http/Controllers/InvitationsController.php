@@ -17,7 +17,8 @@ class InvitationsController extends Controller
     public function sendInvitation(string $name)
     {
         $user = DB::table('users')->where('name', '=', $name)->first();
-        if (DB::table('friends')->where('friend_id', '=', $user->id)->doesntExist())
+
+        if (DB::table('friends')->where('friend_id', '=', $user->id)->where('user_id', '=', Auth::id())->doesntExist())
         {
             $invitation = Invitations::create([
                 'from_user' => Auth::id(),
