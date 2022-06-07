@@ -20,6 +20,7 @@ class CreateUserProfilesTable extends Migration
             $table->string('image')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
