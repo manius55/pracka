@@ -13,7 +13,7 @@
 
         <div class="row my-4">
             <div>
-                <button type="submit" class="btn btn-success col-1 rounded">Stwórz</button>
+                <button type="submit" class="btn btn-success col-1 rounded">Zapisz</button>
                 <a href="{{ url('/channelUsers/' . $channel->id) }}" class="btn btn-danger col-1 rounded">Anuluj</a>
             </div>
         </div>

@@ -27,8 +27,8 @@
         @enderror
         <div class="row my-4">
             <div>
-                <button type="submit" class="btn btn-success col-1 rounded">Save</button>
-                <button href="{{ url('/profile/' . Auth::id()) }}" class="btn btn-danger col-1 rounded">Cancel</button>
+                <button type="submit" class="btn btn-success col-1 rounded">Zapisz</button>
+                <button href="{{ url('/profile/' . Auth::id()) }}" class="btn btn-danger col-1 rounded">Anuluj</button>
             </div>
         </div>
     </form>

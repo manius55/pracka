@@ -9,11 +9,11 @@
 
                 <div class="card-body">
                     @if (\Illuminate\Support\Facades\Auth::check())
-                        <div class="h3">Cześć {{ $name ?? '' }}, jesteś zalogowany</div>
+                        <div class="h3">Cześć{{ $name ?? '' }}, jesteś zalogowany</div>
                     @else
                         <div class="h3">
-                        Cześć, musisz się zalogować.
-                        <a href="{{ url('/login') }}">Log in</a>
+                        Cześć, musisz się
+                        <a href="{{ url('/login') }}">zalogować.</a>
                         </div>
                     @endif
                 </div>
